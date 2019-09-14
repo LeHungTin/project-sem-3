@@ -1,0 +1,145 @@
+﻿@using ProjectQT.DataModel.Models
+@model IEnumerable<ProjectQT.DataModel.Models.Group>
+
+@{
+    ViewBag.Title = "List Group";
+    List<Business> listbusiness = ViewData["Business"] as List<Business>;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .item_group.active td {
+        background: #06c !important;
+        color: white;
+    }
+</style>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        @if (TempData["CreateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["CreateSuccess"]</h3>
+        }
+        @if (TempData["UpdateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["UpdateSuccess"]</h3>
+        }
+        @if (TempData["DeleteSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["DeleteSuccess"]</h3>
+        }
+        @if (TempData["DeleteFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["DeleteFalse"] </h3>
+        }
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>
+                        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                    </p>
+                    <div class="card card-primary">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.GroupName)
+                                </th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr data-groupid="@item.GroupId" class="item_group">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GroupName)
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card card-primary">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Business
+                                </th>
+                                @foreach (var item in ViewBag.Role)
+                                {
+                                    <th class="text-center">@item.RoleId</th>
+                                }
+                            </tr>
+
+                            @foreach (var item in ViewBag.Business)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.BusinessId
+                                    </td>
+                                    @foreach (var role in ViewBag.Role)
+                                    {
+                                        <td class="text-center">
+                                            <input class="item_role" data-business="@item.BusinessId" name="" value="@role.RoleId" type="checkbox" />
+                                        </td>
+                                    }
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".item_group").click(function () {
+                $(this).addClass("active").siblings().removeClass("active");
+                var id = $(this).data("groupid");
+                $.ajax({
+                    type: "GET",
+                    url: "/GroupRoles/GetRole/" + id,
+                    success: function (res) {
+                        //bỏ checked trên cái role
+                        $(".item_role").prop("checked", false);
+                        $.each(res, function () {
+                            $(".item_role[value='" + this.RoleId + "'][data-business='" + this.BusinessId + "']").prop("checked", true);
+                        })
+                    }
+                });
+            })
+            $(".item_role").click(function () {
+                var group = $(".item_group.active");
+                if (group.length > 0) {
+                    var group_role = {
+                        GroupId: group.data("groupid"),
+                        RoleId: $(this).val(),
+                        BusinessId: $(this).data("business")
+                    };
+                    console.log(group_role);
+                    $.ajax({
+                        type: "POST",
+                        url: "/GroupRoles/UpdatePermission",
+                        data: group_role,
+                        success: function (res) {
+                            alert(res.Message);
+                        }
+                    })
+                } else {
+                    alert("vui lòng chọn quền!")
+                }
+            })
+        });
+    </script>
+}
+

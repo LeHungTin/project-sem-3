@@ -1,0 +1,57 @@
+﻿@model ProjectQT.ViewModel.AccountModel.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class=" container text-left">
+    <div class="wrap">
+        <h5 class="text-center mb-4">Login Now</h5>
+        <div class="login p-5 bg-dark mx-auto mw-100">
+            <form action="Register" method="post">
+                <div class="form-group">
+                    <label class="mb-2">Email address</label>
+                    @Html.EditorFor(model => model.Email, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Password</label>
+                    @Html.EditorFor(model => model.Password, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Confirm Password</label>
+                    @Html.EditorFor(model => model.ConfirmPassword, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Full Name</label>
+                    @Html.EditorFor(model => model.FullName, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FullName, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Birthday</label>
+                    @Html.EditorFor(model => model.BirthDay, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BirthDay, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Phone Number</label>
+                    @Html.EditorFor(model => model.PhoneNumber, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Address</label>
+                    @Html.EditorFor(model => model.Address, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address, null, new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="btn btn-primary submit mb-4">Register</button>
+                <br />
+                <a style="color: white">Login </a><b style="color: white">|</b>
+                <a style="color: white"> Forgot Your PassWord?</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

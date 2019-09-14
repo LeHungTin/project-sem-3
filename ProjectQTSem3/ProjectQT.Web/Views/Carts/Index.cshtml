@@ -1,0 +1,112 @@
+﻿@using ProjectQT.ViewModel.CartModel
+@model IEnumerable<ProjectQT.ViewModel.CartModel.CartModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   List<CartModel> ListCartModel = ViewBag.lisCart as List<CartModel>;
+}
+
+<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+    <div class="container">
+        <div class="inner-sec-shop px-lg-4 px-3">
+            <h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+
+            <div class="checkout-right">
+                <h4>
+                    Your shopping cart contains:
+                    <span>@ListCartModel.Count() Products</span>
+                </h4>
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ListCartModel.Count() > 0)
+                        {
+                            var slNO = 0;
+                            foreach (var item in ListCartModel)
+                            {
+                                slNO += 1;
+                                <tr class="rem1">
+                                    <td class="invert">@slNO</td>
+                                    <td class="invert-image">
+                                        <img width="100px" src="@item.Products.ImageUrl" alt=" " class="img-responsive">
+                                    </td>
+                                    <td class="invert">
+                                        <div class="quantity">
+                                            <div class="quantity-select">
+                                                <div class="entry value-minus">&nbsp;</div>
+                                                <div class="entry value">
+                                                    <span>@item.Quantity</span>
+                                                </div>
+                                                <div class="entry value-plus active">&nbsp;</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="invert">@item.Products.Name </td>
+
+                                    <td class="invert">$@item.Products.Price</td>
+                                    <td class="invert">
+                                        <div class="rem">
+                                            <div class="close1"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">No products in the cart</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="checkout-left row">
+                <div class="col-md-10 checkout-left-basket">
+                    <h4>Continue to basket</h4>
+                    <ul>
+
+                        @{
+                            var sl = 0;
+                            decimal totalMoney = 0;
+                            foreach (var item in ListCartModel)
+                            {
+                                var total = item.Products.Price * item.Quantity;
+                                totalMoney += total;
+                                sl += 1;
+                                <li>
+                                    Product(@sl)
+                                    <i>-</i>
+                                    @item.Products.Name
+                                    <i>-</i>
+                                    <span>$@total</span>
+                                </li>
+                            }
+                            <li>
+                                Total
+                                <i>-</i>
+                                <span>$@totalMoney</span>
+                            </li>
+                        }
+                    </ul>
+                    @using (Html.BeginForm("AddToCart", "Carts", FormMethod.Post))
+                    {
+                        <input class="btn btn-success" type="submit" value="Make a Payment" />
+                    }
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+</section>
+

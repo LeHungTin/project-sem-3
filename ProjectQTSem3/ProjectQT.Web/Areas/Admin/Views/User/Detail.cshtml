@@ -1,0 +1,126 @@
+﻿@model ProjectQT.ViewModel.UserModel.UserModel
+
+@{
+    ViewBag.Title = "Info User";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="ui-admin-width40">
+                <h4>
+                    <i>@Html.DisplayFor(model => model.FullName)</i>
+                </h4>
+                <br />
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.Id) :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.Id)</i>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.FullName) :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.FullName)</i>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>Role :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.GroupId)</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.Address) :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.Address)</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.BirthDay) :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.BirthDay)</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.PhoneNumber) :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.PhoneNumber)</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.CreateAt) :</b>
+                            </div>
+                            <div class="col-md-6">
+                                <i>@Html.DisplayFor(model => model.CreateAt)</i>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>@Html.DisplayNameFor(model => model.Status) :</b>
+                            </div>
+
+                            @if (Model.Status == true)
+                            {
+                                <div class="col-md-6">
+                                    <i>Đang kích hoạt</i>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6">
+                                    <i>Đang khóa</i>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer ">
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+    <!-- /.card -->
+</div>

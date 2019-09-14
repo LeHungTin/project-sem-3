@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ProjectQT.DataModel.Models.Business>
+
+@{
+    ViewBag.Title = "List Business";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p>
+    @Html.ActionLink("Update Business", "UpdateBusiness", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        @if (TempData["CreateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["CreateSuccess"]</h3>
+        }
+        @if (TempData["UpdateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["UpdateSuccess"]</h3>
+        }
+        @if (TempData["DeleteSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["DeleteSuccess"]</h3>
+        }
+        @if (TempData["DeleteFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["DeleteFalse"] </h3>
+        }
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BusinessName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BusinessId)
+                        </td>
+                        @if (item.Status == true)
+                        {
+                            <td>
+                                Kích hoạt &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Khóa &nbsp<i style="color : red" class="fa fa-times"></i>
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
