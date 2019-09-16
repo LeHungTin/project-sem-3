@@ -57,7 +57,13 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Json.Net, Version=1.0.16.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Json.Net.1.0.16\lib\netstandard2.0\Json.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -111,9 +117,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -139,7 +142,9 @@
     <Compile Include="Areas\Admin\Controllers\GroupRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\TypeAttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\CustomizeAuthAttribute.cs" />
@@ -156,6 +161,37 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\js\npm.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\Content\bootstrap\Gruntfile.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\browsers.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\change-version.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\generate-sri.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\karma.conf.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\affix.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\alert.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\button.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\carousel.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\collapse.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\dropdown.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\modal.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\popover.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\scrollspy.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\tab.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\tooltip.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\transition.js" />
+    <Content Include="Areas\Admin\Content\bootstrap\package.js" />
     <Content Include="Areas\Admin\Content\build\config\postcss.config.js" />
     <Content Include="Areas\Admin\Content\build\js\AdminLTE.js" />
     <Content Include="Areas\Admin\Content\build\js\ControlSidebar.js" />
@@ -2903,6 +2939,111 @@
     <Content Include="Areas\Admin\Views\TypeAttribute\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TypeAttribute\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Groups\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\OrderDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Admin\Content\bootstrap\.bower.json" />
+    <Content Include="Areas\Admin\Content\bootstrap\bower.json" />
+    <Content Include="Areas\Admin\Content\bootstrap\CHANGELOG.md" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Content\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Content\bootstrap\Gemfile" />
+    <Content Include="Areas\Admin\Content\bootstrap\Gemfile.lock" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\.jshintrc" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\.stylelintrc" />
+    <Content Include="Areas\Admin\Content\bootstrap\grunt\configBridge.json" />
+    <Content Include="Areas\Admin\Content\bootstrap\ISSUE_TEMPLATE.md" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\.jscsrc" />
+    <Content Include="Areas\Admin\Content\bootstrap\js\.jshintrc" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\alerts.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\badges.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\bootstrap.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\button-groups.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\buttons.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\carousel.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\close.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\code.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\component-animations.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\dropdowns.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\forms.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\glyphicons.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\grid.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\input-groups.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\jumbotron.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\labels.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\list-group.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\media.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\forms.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\grid.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\image.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\labels.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\panels.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\resize.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\size.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\modals.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\navbar.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\navs.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\normalize.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\pager.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\pagination.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\panels.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\popovers.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\print.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\progress-bars.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\responsive-embed.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\scaffolding.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\tables.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\theme.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\thumbnails.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\tooltip.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\type.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\utilities.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\variables.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\less\wells.less" />
+    <Content Include="Areas\Admin\Content\bootstrap\LICENSE" />
+    <Content Include="Areas\Admin\Content\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="Areas\Admin\Content\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="Areas\Admin\Content\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="Areas\Admin\Content\bootstrap\package-lock.json" />
+    <Content Include="Areas\Admin\Content\bootstrap\package.json" />
+    <Content Include="Areas\Admin\Content\bootstrap\README.md" />
+    <Content Include="Areas\Admin\Views\Report\_ReportAuction.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2937,7 +3078,6 @@
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\Products\ProductQickView.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
-    <Content Include="Views\Carts\AddToCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

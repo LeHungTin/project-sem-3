@@ -6,7 +6,7 @@ namespace ProjectQT.DataModel.Models
     public class Order : BaseEntity
     {
         public int UserId { get; set; }
-        public int? HandelerId { get; set; }
+        public string HandelerId{ get; set; }
         public DateTime UpdateAt { get; set; }
         public string UpdateBy { get; set; }
 

@@ -52,10 +52,14 @@
                             @foreach (var item in Model)
                             {
                                 <tr data-groupid="@item.GroupId" class="item_group">
-                                    <td>
+                                    <td class="dbClick">
                                         @Html.DisplayFor(modelItem => item.GroupName)
                                     </td>
+                                    <td>
+                                        <a onclick=" return confirm('You definitely want to delete');" href="/Admin/Groups/Delete/@item.GroupId" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
+
                             }
 
                         </table>
@@ -136,9 +140,11 @@
                         }
                     })
                 } else {
-                    alert("vui lòng chọn quền!")
+                    alert("Please choose the right!")
                 }
             })
+
+
         });
     </script>
 }

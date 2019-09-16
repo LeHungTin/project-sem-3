@@ -10,7 +10,6 @@
     <title>QTShop | @ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Ionicons -->
@@ -179,6 +178,15 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="~/Admin/Order" class="nav-link">
+                                <i class="nav-icon fa fa-shopping-cart"></i>
+                                <p>
+                                    Order Manager
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="~/Admin/Products" asp-area="Admin" asp-controller="Product" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fa fa-cubes"></i>
                                 <p>
@@ -229,6 +237,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a href="~/Admin/Report/Index" class="nav-link">
+                                <i class="nav-icon fas fa-chart-bar"></i>
+                                <p>
+                                    Báo cáo thông kê
+                                </p>
+                            </a>
+                        </li>
+
 
                     </ul>
                 </nav>
@@ -286,6 +303,7 @@
     <script src="~/Areas/Admin/Content/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Areas/Admin/Content/dist/js/demo.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/chart.js/Chart.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Thư viện popper đã nén phục vụ cho bootstrap.min.js -->

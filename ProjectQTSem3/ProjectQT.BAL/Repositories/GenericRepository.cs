@@ -1,4 +1,5 @@
 ﻿using ProjectQT.DataModel.Models;
+using ProjectQT.ViewModel.DashboardModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProjectQT.BAL.Repositories
 {
-     public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         #region Properties
 
@@ -105,7 +106,7 @@ namespace ProjectQT.BAL.Repositories
             {
                 return false;
             }
-           
+
         }
 
         /// <summary>
@@ -205,7 +206,6 @@ namespace ProjectQT.BAL.Repositories
                 return null;
             }
         }
-
         #endregion
     }
 }

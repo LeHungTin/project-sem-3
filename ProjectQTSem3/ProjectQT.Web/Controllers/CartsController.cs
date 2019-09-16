@@ -87,7 +87,6 @@ namespace ProjectQT.Web.Controllers
             var orderModel = new Order()
             {
                 UserId = user.Id,
-                HandelerId = 1,
                 UpdateAt = DateTime.Now,
                 CreateAt = DateTime.Now,
                 UpdateBy = user.Email,
@@ -115,6 +114,7 @@ namespace ProjectQT.Web.Controllers
                     CreateAt = DateTime.Now
                 };
                 _orderDetail.Create(oderDetail);
+                Session.Remove("cart");
             }
 
             return RedirectToAction("Index", "Home");

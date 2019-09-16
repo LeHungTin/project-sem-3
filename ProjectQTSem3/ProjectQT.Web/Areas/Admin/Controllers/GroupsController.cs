@@ -46,14 +46,14 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// Action Create Group Method POST
         /// </summary>
         /// <returns></returns>
         // GET: Admin/Groups
         [HttpPost]
-        public ActionResult Create(Group  group)
+        public ActionResult Create(Group group)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,27 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Action Delete Attribute Metod GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                _group.Delete(id);
+                TempData["DeleteSuccess"] = "Delete Success";
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                TempData["DeleteFalse"] = "Delete False";
+                return RedirectToAction("Index");
+            }
 
+        }
 
 
     }

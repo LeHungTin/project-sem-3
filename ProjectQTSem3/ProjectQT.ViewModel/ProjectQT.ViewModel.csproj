@@ -54,9 +54,14 @@
     <Compile Include="AttributeModel\GetAtrributeModel.cs" />
     <Compile Include="CartModel\CartModel.cs" />
     <Compile Include="CategoryModel\CategoryModel.cs" />
+    <Compile Include="DashboardModels\RevenueModel.cs" />
+    <Compile Include="OrderModel\GetAllOrderModel.cs" />
+    <Compile Include="OrderModel\OrderDetailModel.cs" />
     <Compile Include="ProductModel\AddProductModel.cs" />
     <Compile Include="ProductModel\ListProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportModel\FilterDateModel.cs" />
+    <Compile Include="ReportModel\OrderReport.cs" />
     <Compile Include="RevenueModel\RevenueModel.cs" />
     <Compile Include="TypeAttributeModel\TypeAttributeModel.cs" />
     <Compile Include="UserModel\UpdateUserModel.cs" />

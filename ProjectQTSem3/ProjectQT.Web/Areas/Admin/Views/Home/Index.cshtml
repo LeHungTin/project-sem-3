@@ -1,8 +1,10 @@
-﻿@model IEnumerable<ProjectQT.ViewModel.RevenueModel.RevenueModel>
+﻿@model List<ProjectQT.ViewModel.DashboardModels.RevenueModel>
 
 @{
     ViewBag.Title = "List User";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    object listDate = ViewBag.ListLabel as object;
+    object listMoney= ViewBag.ListData as object;
 }
 
 <!DOCTYPE html>
@@ -51,12 +53,10 @@
 {
     <script>
         var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d');
-        @*var listLabel = JSON.parse('@Html.Raw(Json.Serialize(ViewBag.ListLabel))');
-        var listData = JSON.parse('@Html.Raw(Json.Serialize(ViewBag.ListData))');*@
-
+        var listLabel = JSON.parse('@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(listDate))');
+        var listData = JSON.parse('@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(listMoney))');
         var salesGraphChartData = {
-            labels: listLabel
-                ,
+            labels: listLabel,
             datasets: [
                 {
                     label: 'Digital Goods',
@@ -69,7 +69,7 @@
                     pointHoverRadius: 7,
                     pointColor: '#efefef',
                     pointBackgroundColor: '#efefef',
-                    data: listData
+                    data: listData,
                 }
             ]
         }
