@@ -6,14 +6,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
-
-
-
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-</p>
 <div class="col-12">
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">@ViewBag.Title</h3>
@@ -95,11 +91,11 @@
                                 Khóa &nbsp<i style="color : red" class="fa fa-times"></i>
                             </td>
                         }
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
-                        @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
-                        <a onclick=" return confirm('You definitely want to delete');" href="/Admin/Attributes/Delete/@item.Id" class="btn btn-danger">Delete</a>
-                    </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
+                            @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
+                            <a onclick=" return confirm('You definitely want to delete');" href="/Admin/Attributes/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                 }
             </table>
