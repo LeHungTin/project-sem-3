@@ -61,6 +61,10 @@
       <Project>{332CD472-6B7B-4CD2-94AE-3546E4D4B897}</Project>
       <Name>ProjectQT.DataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProjectQT.ViewModel\ProjectQT.ViewModel.csproj">
+      <Project>{2d7d3664-4f42-4a1d-a2b6-e66a5d8ec7af}</Project>
+      <Name>ProjectQT.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
