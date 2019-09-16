@@ -3,7 +3,25 @@
     ViewBag.Title = "ProductQickView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    #horizontalTab {
+        color: black;
+    }
 
+        #horizontalTab nav .nav-item {
+            
+            color: black;
+        }
+        #horizontalTab nav .nav-item:hover{
+            background-color: #000;
+            color: white;
+        }
+
+            #horizontalTab nav .active {
+                background-color: #000;
+                color: white;
+            }
+</style>
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
     <div class="container">
         <div class="inner-sec-shop pt-lg-4 pt-3">
@@ -123,16 +141,16 @@
                 <!--/tabs-->
                 <div class="responsive_tabs">
                     <div id="horizontalTab">
-                        <ul class="resp-tabs-list">
-                            <li>Description</li>
-                            <li>Reviews</li>
-                            <li>Information</li>
-                        </ul>
-                        <div class="resp-tabs-container">
-                            <!--/tab_one-->
-                            <div class="tab1">
-
-                                <div class="single_page">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reviews</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Information</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="single_page resp-tabs-container">
                                     <h6>Lorem ipsum dolor sit amet</h6>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
@@ -148,10 +166,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <!--//tab_one-->
-                            <div class="tab2">
-
-                                <div class="single_page">
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="single_page resp-tabs-container">
                                     <div class="bootstrap-tab-text-grids">
                                         <div class="bootstrap-tab-text-grid">
                                             <div class="bootstrap-tab-text-grid-left">
@@ -183,9 +199,8 @@
 
                                 </div>
                             </div>
-                            <div class="tab3">
-
-                                <div class="single_page">
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="single_page resp-tabs-container">
                                     <h6>Irayz Butterfly Sunglasses  (Black)</h6>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie

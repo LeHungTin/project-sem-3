@@ -5,11 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-</p>
+
 
 <div class="col-12">
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">@ViewBag.Title</h3>
@@ -85,13 +86,13 @@
                             @Html.DisplayFor(modelItem => item.Address)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BirthDay)
+                            @Html.DisplayFor(modelItem => item.BirthDay.Date)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.PhoneNumber)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreateAt)
+                            @Html.DisplayFor(modelItem => item.CreateAt.Date)
                         </td>
                         @if (item.Status == true)
                         {
@@ -110,7 +111,7 @@
                             @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
                             @if (item.Status == true)
                             {
-                                <a  onclick=" return confirm('You definitely want to lock');" href="/Admin/User/LockUser/@item.Id" class="btn btn-danger">Lock</a>
+                                <a onclick=" return confirm('You definitely want to lock');" href="/Admin/User/LockUser/@item.Id" class="btn btn-danger">Lock</a>
 
                             }
                             else
