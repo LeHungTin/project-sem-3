@@ -31,5 +31,8 @@ namespace ProjectQT.ViewModel.ProductModel
         public string ImageUrl { get; set; }
         public DateTime UpdateAt { get; set; }
         public string UpdateBy { get; set; }
+        public float? Reate { get; set; }
+        public int? CountBuy { get; set; }
+        public int? CountView { get; set; }
     }
 }

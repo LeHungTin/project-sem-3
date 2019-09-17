@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectQT.BAL.Repositories;
+using ProjectQT.DataModel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,14 +10,26 @@ namespace ProjectQT.Web.Controllers
 {
     public class ProductsController : Controller
     {
-        
+        GenericRepository<Product> _Product;
+        public ProductsController()
+        {
+            _Product = new GenericRepository<Product>();
+        }
         /// <summary>
         /// Action View Detail Product Method GET
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProductQickView()
+        
+        [HttpPost]
+        public ActionResult ProductQickView(int id)
         {
-            return View();
+            var product = _Product.GetById(id);
+            product.CountView += 1;
+            if (_Product.Update(product))
+            {
+                return View(product);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

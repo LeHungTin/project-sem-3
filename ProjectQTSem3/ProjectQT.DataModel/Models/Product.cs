@@ -18,6 +18,8 @@ namespace ProjectQT.DataModel.Models
         public DateTime UpdateAt { get; set; }
         public string UpdateBy { get; set; }
         public float? Reate { get; set; }
+        public int? CountBuy { get; set; }
+        public int? CountView { get; set; }
 
         public ICollection<OrderDetail> OrderDetail { get; set; }
         public ICollection<ProductAttribute> ProductAttributes { get; set; }

@@ -90,7 +90,6 @@ namespace ProjectQT.Web.Controllers
                 UpdateAt = DateTime.Now,
                 CreateAt = DateTime.Now,
                 UpdateBy = user.Email,
-                CreateBy = user.Id,
                 Status = false
             };
             try
