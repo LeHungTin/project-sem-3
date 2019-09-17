@@ -14,12 +14,14 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         GenericRepository<Business> _business;
         GenericRepository<Role> _role;
         GenericRepository<GroupRole> _groupRole;
+        GenericRepository<User> _user;
         public GroupsController()
         {
             _group = new GenericRepository<Group>();
             _business = new GenericRepository<Business>();
             _role = new GenericRepository<Role>();
             _groupRole = new GenericRepository<GroupRole>();
+            _user = new GenericRepository<User>();
         }
 
         /// <summary>
@@ -96,8 +98,19 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         {
             try
             {
-                _group.Delete(id);
-                TempData["DeleteSuccess"] = "Delete Success";
+                var groupID = _group.GetById(id);
+                var checkExitUSer = _user.GetBy(x => x.GroupId == groupID.GroupId);
+                if (checkExitUSer == null)
+                {
+                    if (_group.Delete(id))
+                    {
+                        TempData["DeleteSuccess"] = "Delete Success";
+                        return RedirectToAction("Index");
+                    }
+                    TempData["DeleteFalse"] = "Delete False";
+                    return RedirectToAction("Index");
+                }
+                TempData["DeleteFalse"] = "Delete False";
                 return RedirectToAction("Index");
             }
             catch (Exception)

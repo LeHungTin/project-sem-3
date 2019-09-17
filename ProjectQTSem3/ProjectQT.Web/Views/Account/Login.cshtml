@@ -9,6 +9,11 @@
             <h5 class="text-center mb-4">Login Now</h5>
             <div style="width:50%; margin: 0 auto;">
                 <form action="" method="post" class="form">
+                    @if (TempData["RigisterSucess"] != null)
+                    {
+                        <h3 class="alert alert-success lisproduct-alert">@TempData["RigisterSucess"]</h3>
+                    }
+                    
                     @if (ViewBag.err != null)
                     {
                         <p class="alert alert-danger">@ViewBag.err</p>

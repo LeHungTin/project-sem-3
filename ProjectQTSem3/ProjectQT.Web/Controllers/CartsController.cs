@@ -27,26 +27,26 @@ namespace ProjectQT.Web.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            if (Session["User"] == null)
-            {
-                ViewData["login"] = "Please login to continue";
-                return RedirectToAction("Login", "Account");
-            }
-            if (Session["cart"] != null)
-            {
-                var listCart = Session["cart"] as List<CartModel>;
-                ViewBag.lisCart = listCart;
-                return View();
-            }
-            return RedirectToAction("Index", "Home");
+            
+            return View();
+
         }
 
         /// <summary>
         /// Action Add Poroduct into Session Cart
         /// </summary>
         /// <returns></returns>
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(int? id)
         {
+            if (Session["User"] == null)
+            {
+                ViewData["login"] = "Please login to continue";
+                return RedirectToAction("Login", "Account");
+            }
+            if (id == null)
+            {
+                return View();
+            }
             List<CartModel> listCart = new List<CartModel>();
             var product = _product.GetById(id);
             if (Session["cart"] != null)
@@ -72,7 +72,8 @@ namespace ProjectQT.Web.Controllers
                 listCart.Add(new CartModel { Products = product, Quantity = 1 });
             }
             Session["cart"] = listCart;
-            return RedirectToAction("Index");
+            ViewBag.lisCart = listCart;
+            return View();
         }
 
         /// <summary>
@@ -113,9 +114,11 @@ namespace ProjectQT.Web.Controllers
                     CreateAt = DateTime.Now
                 };
                 _orderDetail.Create(oderDetail);
+                var product = _product.GetBy(x => x.Id == item.Products.Id);
+                product.CountBuy += item.Quantity;
+                _product.Update(product);
                 Session.Remove("cart");
             }
-
             return RedirectToAction("Index", "Home");
         }
     }

@@ -4,7 +4,6 @@ using ProjectQT.ViewModel.AccountModel;
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using System.Data.Entity;
 using System.Web.Security;
 using ProjectQT.Web.Models;
 
@@ -100,6 +99,7 @@ namespace ProjectQT.Web.Controllers
                     <b>Email đăng ký :</b> {0}
                     <p>Trân trọng </p>
                     ", user.Email));
+                    TempData["RigisterSucess"] = "Đăng ký tài khoản thành công.";
                     return RedirectToAction("Login");
                 }
                 return View(registerViewModel);

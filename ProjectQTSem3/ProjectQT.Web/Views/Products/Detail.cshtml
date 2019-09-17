@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjectQT.DataModel.Models.Product
 @{
     ViewBag.Title = "ProductQickView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,18 +9,18 @@
     }
 
         #horizontalTab nav .nav-item {
-            
             color: black;
         }
-        #horizontalTab nav .nav-item:hover{
-            background-color: #000;
-            color: white;
-        }
 
-            #horizontalTab nav .active {
+            #horizontalTab nav .nav-item:hover {
                 background-color: #000;
                 color: white;
             }
+
+        #horizontalTab nav .active {
+            background-color: #000;
+            color: white;
+        }
 </style>
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
     <div class="container">
@@ -29,16 +29,11 @@
                 <div class="col-lg-4 single-right-left ">
                     <div class="grid images_3_of_2">
                         <div class="flexslider1">
-
                             <ul class="slides">
                                 <li data-thumb="images/d2.jpg">
-                                    <div class="thumb-image"> <img src="images/d2.jpg" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                                </li>
-                                <li data-thumb="images/d1.jpg">
-                                    <div class="thumb-image"> <img src="images/d1.jpg" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                                </li>
-                                <li data-thumb="images/d3.jpg">
-                                    <div class="thumb-image"> <img src="images/d3.jpg" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+                                    <div class="thumb-image">
+                                        <img width="350" height="400" src="@Model.ImageUrl" data-imagezoom="true" class="img-fluid" alt=" ">
+                                    </div>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
@@ -46,26 +41,119 @@
                     </div>
                 </div>
                 <div class="col-lg-8 single-right-left simpleCart_shelfItem">
-                    <h3>Irayz Butterfly Sunglasses  (Black)</h3>
+                    <h3>@Model.Name</h3>
                     <p>
-                        <span class="item_price">$650</span>
-                        <del>$1,199</del>
+                        @if (Model.SalePrice != null)
+                        {
+                            <span class="item_price">$@Model.SalePrice</span>
+                        }
+                        else
+                        {
+                            <del>$@Model.Price</del>
+                        }
                     </p>
                     <div class="rating1">
                         <ul class="stars">
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                            @if (Model.Reate <= 1)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 2)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 3)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 4)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 5)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="#">
+                                        There are no reviews yet
+                                    </a>
+                                </li>
+                            }
+
                         </ul>
-                    </div>
-                    <div class="description">
-                        <h5>Check delivery, payment options and charges at your location</h5>
-                        <form action="#" method="post">
-                            <input class="form-control" type="text" name="Email" placeholder="Please enter..." required="">
-                            <input type="submit" value="Check">
-                        </form>
                     </div>
                     <div class="occasional">
                         <h5>Types :</h5>
@@ -80,21 +168,19 @@
                         </div>
                         <div class="clearfix"> </div>
                     </div>
-                    <div class="occasion-cart">
-                        <div class="googles single-item singlepage">
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="googles_item" value="Farenheit">
-                                <input type="hidden" name="amount" value="575.00">
-                                <button type="submit" class="googles-cart pgoogles-cart">
-                                    Add to Cart
-                                </button>
 
-                            </form>
-
-                        </div>
-                    </div>
+                    @if (Session["User"] == null)
+                    {
+                        <a style="color:white; background-color:black; font-weight:bold" href="~/Account/Login" class=" btn googles-cart pgoogles-cart">
+                            Add to Cart
+                        </a>
+                    }
+                    else
+                    {
+                        <a style="color:white; background-color:black; font-weight:bold" href="~/Carts/AddToCart/@Model.Id" class=" btn googles-cart pgoogles-cart">
+                            Add to Cart
+                        </a>
+                    }
                     <ul class="footer-social text-left mt-lg-4 mt-3">
                         <li>Share On : </li>
                         <li class="mx-2">

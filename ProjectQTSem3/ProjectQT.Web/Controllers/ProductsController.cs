@@ -15,13 +15,18 @@ namespace ProjectQT.Web.Controllers
         {
             _Product = new GenericRepository<Product>();
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
         /// <summary>
         /// Action View Detail Product Method GET
         /// </summary>
         /// <returns></returns>
         
-        [HttpPost]
-        public ActionResult ProductQickView(int id)
+        [HttpGet]
+        public ActionResult Detail(int id)
         {
             var product = _Product.GetById(id);
             product.CountView += 1;

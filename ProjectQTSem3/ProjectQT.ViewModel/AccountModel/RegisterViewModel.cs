@@ -17,8 +17,10 @@ namespace ProjectQT.ViewModel.AccountModel
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         [Required]
+        [StringLength(31, MinimumLength =6, ErrorMessage = "FullName must be between 6 and 31 characters")]
         public string FullName { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime BirthDay { get; set; }
         [Required]
         public string PhoneNumber { get; set; }

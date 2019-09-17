@@ -13,11 +13,13 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
     {
         GenericRepository<Category> _category;
         GenericRepository<User> _user;
+        GenericRepository<Product> _product;
 
         public CategoriesController()
         {
             _category = new GenericRepository<Category>();
             _user = new GenericRepository<User>();
+            _product = new GenericRepository<Product>();
         }
 
         /// <summary>
@@ -177,13 +179,22 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         {
             try
             {
-                if (_category.Delete(id))
+                var categoryId = _category.GetById(id);
+                var checkExitProduct = _product.GetBy(x => x.CategoryId == categoryId.Id);
+                if (checkExitProduct == null)
                 {
-                    TempData["DeleteSuccess"] = "Delete Success";
+                    if (_category.Delete(id))
+                    {
+                        TempData["DeleteSuccess"] = "Delete Success";
+                        return RedirectToAction("Index");
+                    }
+                    TempData["DeleteFalse"] = "Delete False";
                     return RedirectToAction("Index");
                 }
                 TempData["DeleteFalse"] = "Delete False";
                 return RedirectToAction("Index");
+
+                
             }
             catch (Exception)
             {

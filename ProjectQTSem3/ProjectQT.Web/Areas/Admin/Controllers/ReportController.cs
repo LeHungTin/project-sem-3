@@ -23,11 +23,11 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
             _product = new GenericRepository<Product>();
             _User = new GenericRepository<User>();
         }
-        public IEnumerable<OrderReport> GetAuctionReports(FilterDateModel dateModel)
+        public IEnumerable<OrderReport> GetOrderReports(FilterDateModel dateModel)
         {
-            var listOrderDetail = from orderDetail in _orderDetail.GetAll()
-                                  join order in _order.GetAll()
-                                  on orderDetail.OrderId equals order.Id
+            var listOrderDetail = from order in _order.GetAll()
+                                  join orderDetail in _orderDetail.GetAll()
+                                  on order.Id equals orderDetail.OrderId
                                   join product in _product.GetAll()
                                   on orderDetail.ProductId equals product.Id
                                   join user in _User.GetAll()
@@ -42,7 +42,9 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                                       ProductId = product.Name,
                                       Quantity = orderDetail.Quantity,
                                       Status = orderDetail.Status,
-                                      Price = orderDetail.Price
+                                      Price = orderDetail.Price,
+                                      CountBuy = product.CountBuy,
+                                      CountView = product.CountView
                                   };
             if (!string.IsNullOrEmpty(dateModel.NameProduct))
             {
@@ -59,20 +61,24 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         // GET: Admin/Report
         public ActionResult Index(FilterDateModel dateModel)
         {
-            var orderReport = GetAuctionReports(dateModel).ToList();
-            ViewBag.xLabels = GetAuctionReports(dateModel).Select(x => x.ProductId).ToList();
-            ViewBag.yValues = GetAuctionReports(dateModel).Select(x => x.Price).ToList();
-
-            return View(orderReport);
+            //var product = _product.GetAll();
+            //var orderReport = GetOrderReports(dateModel).ToList();
+            //ViewBag.xLabels = product.Select(x => x.Name).ToList();
+            //ViewBag.yValues = GetOrderReports(dateModel).Select(x => x.CountBuy).ToList(); 
+            //ViewBag.y2Values = GetOrderReports(dateModel).Select(x => x.CountView).ToList();
+            //return View(orderReport);
+            return View();
         }
 
-        //[HttpPost]
-        //public ActionResult FilterReport(FilterDateModel dateModel)
-        //{
-        //    var orderReport = GetAuctionReports(dateModel).ToList();
-        //    ViewBag.xLabels = GetAuctionReports(dateModel).Select(x => x.ProductId).ToList();
-        //    ViewBag.yValues = GetAuctionReports(dateModel).Select(x => x.Price).ToList();
-        //    return PartialView("~/Admin/View/Report/_ReportAuction", orderReport);
-        //}
+        [HttpPost]
+        public ActionResult FilterReport(FilterDateModel dateModel)
+        {
+            var product = _product.GetAll();
+            var orderReport = GetOrderReports(dateModel).ToList();
+            ViewBag.xLabels = product.Select(x => x.Name).ToList();
+            ViewBag.yValues = GetOrderReports(dateModel).Select(x => x.CountBuy).ToList();
+            ViewBag.y2Values = GetOrderReports(dateModel).Select(x => x.CountView).ToList();
+            return PartialView("_ReportAuction", orderReport);
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         GenericRepository<Category> _category;
         GenericRepository<TypeAttribute> _typeAttribute;
         GenericRepository<ProductAttribute> _productAttribute;
+        GenericRepository<OrderDetail> _orderDetail;
         GenericRepository<DataModel.Models.Attribute> _attribute;
 
         public ProductsController()
@@ -26,6 +27,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
             _category = new GenericRepository<Category>();
             _attribute = new GenericRepository<DataModel.Models.Attribute>();
             _typeAttribute = new GenericRepository<TypeAttribute>();
+            _orderDetail = new GenericRepository<OrderDetail>();
             _productAttribute = new GenericRepository<ProductAttribute>();
         }
 
@@ -111,6 +113,9 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                 product.CreateAt = DateTime.Now;
                 product.CreateBy = user.Id;
                 product.Status = true;
+                product.Reate = 5;
+                product.CountBuy = 0;
+                product.CountView = 0;
                 if (_product.Create(product))
                 {
                     TempData["CreateSuccess"] = "Create Success";
@@ -196,9 +201,22 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         {
             try
             {
-                _product.Delete(id);
-                TempData["DeleteSuccess"] = "Delete Success";
+                var productId = _product.GetById(id);
+                var checkExitOrder= _orderDetail.GetBy(x => x.ProductId == productId.Id);
+                if (checkExitOrder == null)
+                {
+                    if (_product.Delete(id))
+                    {
+                        TempData["DeleteSuccess"] = "Delete Success";
+                        return RedirectToAction("Index");
+                    }
+                    TempData["DeleteFalse"] = "Delete False";
+                    return RedirectToAction("Index");
+                }
+                TempData["DeleteFalse"] = "Delete False";
                 return RedirectToAction("Index");
+
+                
             }
             catch (Exception)
             {

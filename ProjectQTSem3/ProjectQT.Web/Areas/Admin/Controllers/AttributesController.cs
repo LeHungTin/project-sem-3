@@ -12,15 +12,17 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
     public class AttributesController : Controller
     {
 
-        GenericRepository<DataModel.Models.Attribute> _attribue;
-        GenericRepository<TypeAttribute> _Typeattribue;
+        GenericRepository<DataModel.Models.Attribute> _attribute;
+        GenericRepository<TypeAttribute> _Typeattribute;
+        GenericRepository<ProductAttribute> _productAttribute;
         GenericRepository<User> _user;
 
         public AttributesController()
         {
-            _attribue = new GenericRepository<DataModel.Models.Attribute>();
+            _attribute = new GenericRepository<DataModel.Models.Attribute>();
             _user = new GenericRepository<User>();
-            _Typeattribue = new GenericRepository<TypeAttribute>();
+            _productAttribute = new GenericRepository<ProductAttribute>();
+            _Typeattribute = new GenericRepository<TypeAttribute>();
         }
 
         /// <summary>
@@ -31,10 +33,10 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var listAttribute = from attribue in _attribue.GetAll()
+            var listAttribute = from attribue in _attribute.GetAll()
                                join user in _user.GetAll()
                                on attribue.CreateBy equals user.Id
-                               join type in _Typeattribue.GetAll()
+                               join type in _Typeattribute.GetAll()
                                on attribue.TypeId equals type.Id
                                select new AttributeModel
                                {
@@ -57,9 +59,9 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Detail(int? id)
         {
-            var atrribute = _attribue.GetById(id);
+            var atrribute = _attribute.GetById(id);
             var user = _user.GetBy(x => x.Id == atrribute.CreateBy);
-            var typeAttribute = _Typeattribue.GetBy(x => x.Id == atrribute.TypeId);
+            var typeAttribute = _Typeattribute.GetBy(x => x.Id == atrribute.TypeId);
             GetAtrributeModel atrributeModel = new GetAtrributeModel()
             {
                 Id = atrribute.Id,
@@ -83,7 +85,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.TypeId = new SelectList(_Typeattribue.GetAll(), "Id", "TypeName");
+            ViewBag.TypeId = new SelectList(_Typeattribute.GetAll(), "Id", "TypeName");
             return View();
         }
 
@@ -106,14 +108,14 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                 atrribute.UpdateBy = user.Email;
                 atrribute.TypeId = attributeModel.TypeId;
                 atrribute.Value = "1";
-                if (_attribue.GetAll().FirstOrDefault(x => x.Name == attributeModel.Name) != null)
+                if (_attribute.GetAll().FirstOrDefault(x => x.Name == attributeModel.Name) != null)
                 {
                     ModelState.AddModelError("Name", "Category already exists");
                     return View(attributeModel);
                 }
                 try
                 {
-                    if (_attribue.Create(atrribute))
+                    if (_attribute.Create(atrribute))
                     {
                         TempData["CreateSuccess"] = "Create Success";
                         return RedirectToAction("Index");
@@ -138,7 +140,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            var category = _attribue.GetById(id);
+            var category = _attribute.GetById(id);
             var attributeModel = new AttributeModel();
             attributeModel.Id = category.Id;
             attributeModel.Name = category.Name;
@@ -176,7 +178,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
 
                 try
                 {
-                    if (_attribue.Update(attribute))
+                    if (_attribute.Update(attribute))
                     {
                         TempData["UpdateSuccess"] = "Update Success";
                         return RedirectToAction("Index");
@@ -206,8 +208,19 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         {
             try
             {
-                _attribue.Delete(id);
-                TempData["DeleteSuccess"] = "Delete Success";
+                var attributeId = _attribute.GetById(id);
+                var checkExitProduct = _productAttribute.GetBy(x => x.AttributeId == attributeId.Id);
+                if (checkExitProduct == null)
+                {
+                    if (_attribute.Delete(id))
+                    {
+                        TempData["DeleteSuccess"] = "Delete Success";
+                        return RedirectToAction("Index");
+                    }
+                    TempData["DeleteFalse"] = "Delete False";
+                    return RedirectToAction("Index");
+                }
+                TempData["DeleteFalse"] = "Delete False";
                 return RedirectToAction("Index");
             }
             catch (Exception)

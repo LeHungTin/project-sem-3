@@ -3075,12 +3075,15 @@
     <Content Include="Views\Error\Error400.cshtml" />
     <Content Include="Views\Error\Error403.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
-    <Content Include="Views\Products\ProductQickView.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Detail.cshtml" />
+    <Content Include="Views\Carts\AddToCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Content\Uploads\" />
+    <Folder Include="Areas\Admin\Views\Default\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,8 @@
 ﻿using ProjectQT.BAL.Repositories;
 using ProjectQT.DataModel.Models;
 using ProjectQT.ViewModel.TypeAttributeModel;
-using ProjectQT.Web.Areas.Admin.Models;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
@@ -15,11 +11,13 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
     public class TypeAttributeController : Controller
     {
         GenericRepository<TypeAttribute> _typeAttribute;
+        GenericRepository<DataModel.Models.Attribute> _attribute;
         GenericRepository<User> _user;
         public TypeAttributeController()
         {
             _typeAttribute = new GenericRepository<TypeAttribute>();
             _user = new GenericRepository<User>();
+            _attribute = new GenericRepository<DataModel.Models.Attribute>();
         }
 
         /// <summary>
@@ -128,9 +126,16 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         {
             try
             {
-                if (_typeAttribute.Delete(id))
+                var typeAttributeId = _typeAttribute.GetById(id);
+                var checkExitAttributeId = _attribute.GetBy(x => x.TypeId == typeAttributeId.Id);
+                if (checkExitAttributeId == null)
                 {
-                    TempData["DeleteSuccess"] = "Delete Success";
+                    if (_typeAttribute.Delete(id))
+                    {
+                        TempData["DeleteSuccess"] = "Delete Success";
+                        return RedirectToAction("Index");
+                    }
+                    TempData["DeleteFalse"] = "Delete False";
                     return RedirectToAction("Index");
                 }
                 TempData["DeleteFalse"] = "Delete False";
