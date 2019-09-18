@@ -34,8 +34,9 @@
         <div class="card-body table-responsive">
             <table class="table">
                 <tr>
+                    
                     <th>
-                        @Html.DisplayNameFor(model => model.ProduceCode)
+                        @Html.DisplayNameFor(model => model.ImageUrl)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
@@ -49,12 +50,8 @@
                     <th>
                         @Html.DisplayNameFor(model => model.SalePrice)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ImageUrl)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreateAt)
-                    </th>
+
+
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
@@ -63,46 +60,43 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
+                <tr>
+                    
+                    <td>
+                        <img width="70px" height="70px" src="@item.ImageUrl" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categorie.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalePrice)
+                    </td>
+
+
+                    @if (item.Status == true)
+                    {
                         <td>
-                            @Html.DisplayFor(modelItem => item.ProduceCode)
+                            Active &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
                         </td>
+                    }
+                    else
+                    {
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            Block &nbsp<i style="color : red" class="fa fa-times"></i>
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Categorie.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SalePrice)
-                        </td>
-                        <td>
-                            <img width="70px" height="70px" src="@item.ImageUrl" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateAt)
-                        </td>
-                        @if (item.Status == true)
-                        {
-                            <td>
-                                Kích hoạt &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                Khóa &nbsp<i style="color : red" class="fa fa-times"></i>
-                            </td>
-                        }
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
-                            @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
-                            <a onclick=" return confirm('You definitely want to delete');" href="/Admin/Products/Delete/@item.Id" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
+                    }
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
+                        @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
+                        <a onclick=" return confirm('You definitely want to delete');" href="/Admin/Products/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
                 }
 
             </table>

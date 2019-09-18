@@ -12,11 +12,13 @@
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div style="width:592.333px; height:676.333px" class="col-md-3 product-men women_two">
+                    <div style="width:592.333px; height:676.333px" class="col-md-3">
                         <div class="product-googles-info googles">
                             <div class="men-pro-item">
                                 <div class="men-thumb-item">
-                                    <img src="@item.ImageUrl" class="img-fluid" alt="">
+                                    <div style="width: 263px; height: 263px;">
+                                        <img src="@item.ImageUrl" style="width: 100%; height: 100%;">
+                                    </div>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="/Products/Detail/@item.Id" class="link-product-add-cart">Quick View</a>
@@ -145,24 +147,7 @@
 
                                             </ul>
                                         </div>
-                                        <div class="googles single-item hvr-outline-out">
-                                            <form action="#" method="post">
-                                                <input type="hidden" name="cmd" value="_cart">
-                                                <input type="hidden" name="add" value="1">
-                                                <input type="hidden" name="googles_item" value="Farenheit">
-                                                <input type="hidden" name="amount" value="575.00">
-                                                <button class="googles-cart pgoogles-cart">
-                                                    @if (Session["User"] == null)
-                                                    {
-                                                        <a href="~/Account/Login" class="fas fa-cart-plus"></a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="~/Carts/AddToCart/@item.Id" class="fas fa-cart-plus"></a>
-                                                    }
-                                                </button>
-                                            </form>
-                                        </div>
+                                       
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>

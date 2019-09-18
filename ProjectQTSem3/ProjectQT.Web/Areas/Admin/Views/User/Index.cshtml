@@ -55,15 +55,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Address)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BirthDay)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreateAt)
-                    </th>
+                    
+                    
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
@@ -85,25 +79,19 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Address)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BirthDay.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateAt.Date)
-                        </td>
+                        
+                        
+                        
                         @if (item.Status == true)
                         {
                             <td>
-                                Kích hoạt &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
+                                Active &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
                             </td>
                         }
                         else
                         {
                             <td>
-                                Khóa &nbsp<i style="color : red" class="fa fa-times"></i>
+                                Block &nbsp<i style="color : red" class="fa fa-times"></i>
                             </td>
                         }
                         <td>
