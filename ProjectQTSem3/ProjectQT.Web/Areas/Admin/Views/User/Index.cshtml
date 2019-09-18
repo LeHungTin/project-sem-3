@@ -1,0 +1,120 @@
+﻿@model IEnumerable<ProjectQT.DataModel.Models.User>
+
+@{
+    ViewBag.Title = "List User";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="col-12">
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        @if (TempData["CreateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["CreateSuccess"]</h3>
+        }
+        @if (TempData["UpdateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["UpdateSuccess"]</h3>
+        }
+        @if (TempData["DeleteSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["DeleteSuccess"]</h3>
+        }
+        @if (TempData["DeleteFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["DeleteFalse"] </h3>
+        }
+        @if (TempData["LockSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["LockSuccess"] </h3>
+        }
+        @if (TempData["UnLockSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["UnLockSuccess"] </h3>
+        }
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    
+                    
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Action</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Groups.GroupName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        
+                        
+                        
+                        @if (item.Status == true)
+                        {
+                            <td>
+                                Active &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Block &nbsp<i style="color : red" class="fa fa-times"></i>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
+                            @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
+                            @if (item.Status == true)
+                            {
+                                <a onclick=" return confirm('You definitely want to lock');" href="/Admin/User/LockUser/@item.Id" class="btn btn-danger">Lock</a>
+
+                            }
+                            else
+                            {
+                                <a onclick=" return confirm('You definitely want to unlock');" href="/Admin/User/UnLockUser/@item.Id" class="btn btn-success">UnLock</a>
+
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

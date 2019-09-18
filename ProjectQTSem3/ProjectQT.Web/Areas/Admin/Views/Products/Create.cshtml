@@ -1,0 +1,148 @@
+﻿@model ProjectQT.DataModel.Models.Product
+
+@{
+    ViewBag.Title = "Create Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .width_100 {
+        width: 100%;
+    }
+</style>
+<div class="card ">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProduceCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ProduceCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProduceCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalePrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SalePrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <textarea cols="20" htmlattributes="{ class = form-control}" id="Description" name="Description" rows="2" style="width:100%"></textarea>
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control upload_file" } })
+                            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                            <br />
+                            <img style="width: 250px" data-for="ImageUrl" />
+                        </div>
+                    </div>
+                    @foreach (var item in ViewBag.TypeAttribute)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2">@item.TypeName</label>
+                            <label class="col-md-10">
+                                @foreach (var attr in item.Attributes)
+                                {
+                                    <label>
+                                        <input class="attr_product" type="checkbox" name="" value="@attr.Id" />
+                                        <b>@attr.Name</b>&nbsp;&nbsp;&nbsp;
+                                    </label>
+                                }
+                            </label>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+    <div class="card-footer ">
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Admin/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Admin/Content/ckfinder/ckfinder.js"></script>
+    <script>
+        $(function () {
+            $(".upload_file").click(function () {
+                var input = $(this);
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    input.val(url);
+                    $("img[data-for='" + input.attr("id") + "']").attr("src", url);
+                }
+                finder.popup();
+            });
+        });
+        $(function () {
+            $(".attr_product").click(function () {
+                var _index = 0;
+                //duyệt qua các Attribute
+                $(".attr_product").each(function () {
+                    //Nếu input đó được chọn
+                    if ($(this).is(":checked")) {
+                        $(this).attr("name", "ProductAttributes[" + _index + "].AttributeId")
+                        _index++;
+                    } else {
+                        $(this).attr("name", "")
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+

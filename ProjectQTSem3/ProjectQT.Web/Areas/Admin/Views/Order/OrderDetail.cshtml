@@ -1,0 +1,66 @@
+﻿@model ProjectQT.DataModel.Models.Order
+@using ProjectQT.ViewModel.OrderModel
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    decimal totalMoney = 0;
+    IEnumerable<OrderDetailModel> listOrderDetail = ViewBag.OrderDetail as IEnumerable<OrderDetailModel>;
+}
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    OrderBy
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    CreateAt
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+
+            @foreach (var item in listOrderDetail)
+            {
+                totalMoney += item.Price;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateAt)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Total Money:</b></td>
+                <td>
+                    <b>$@totalMoney</b>
+                </td>
+            </tr>
+        </table>
+        @using (Html.BeginForm("Approve", "Order", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <input class="btn btn-success" type="submit" value="Aprove" />
+            <input class="btn btn-danger" type="submit" value="Reject" />
+        }
+    </div>

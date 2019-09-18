@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ProjectQT.DataModel.Models.Product>
+
+@{
+    ViewBag.Title = "List Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="col-12">
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        @if (TempData["CreateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["CreateSuccess"]</h3>
+        }
+        @if (TempData["UpdateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["UpdateSuccess"]</h3>
+        }
+        @if (TempData["DeleteSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["DeleteSuccess"]</h3>
+        }
+        @if (TempData["DeleteFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["DeleteFalse"] </h3>
+        }
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+            <table class="table">
+                <tr>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImageUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalePrice)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Action</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    
+                    <td>
+                        <img width="70px" height="70px" src="@item.ImageUrl" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categorie.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalePrice)
+                    </td>
+
+
+                    @if (item.Status == true)
+                    {
+                        <td>
+                            Active &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Block &nbsp<i style="color : red" class="fa fa-times"></i>
+                        </td>
+                    }
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
+                        @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
+                        <a onclick=" return confirm('You definitely want to delete');" href="/Admin/Products/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                }
+
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

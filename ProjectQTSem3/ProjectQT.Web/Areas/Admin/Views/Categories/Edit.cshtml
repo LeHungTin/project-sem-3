@@ -1,0 +1,86 @@
+﻿@model ProjectQT.ViewModel.CategoryModel.CategoryModel
+
+@{
+    ViewBag.Title = "Edit Category";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card ">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+    </div>
+    <div class="card-body">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.CreateBy)
+                    @Html.HiddenFor(model => model.UpdateBy)
+                    @Html.HiddenFor(model => model.CreateAt)
+                    @Html.HiddenFor(model => model.UpdateAt)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <input type="text" name="Name" value="@Model.Name" class="form-control">
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row clearfix">
+                        <label class="col-md-3 ">Status</label>
+                        @if (Model.Status == true)
+                        {
+                            <label class="col-md-3 container text-success">
+                                Active
+                                <input checked class="" type="radio" name="Status" value="true" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="col-md-6 container text-danger">
+                                Block
+                                <input type="radio" name="Status" value="false">
+                                <span class="checkmark"></span>
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="col-md-3 container text-success">
+                                Active
+                                <input checked class="" type="radio" name="Status" value="true" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="col-md-6 container text-danger">
+                                Block
+                                <input checked type="radio" name="Status" value="false">
+                                <span class="checkmark"></span>
+                            </label>
+                        }
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer ">
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+
+
+

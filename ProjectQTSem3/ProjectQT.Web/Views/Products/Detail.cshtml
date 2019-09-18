@@ -1,0 +1,303 @@
+﻿@model ProjectQT.DataModel.Models.Product
+@{
+    ViewBag.Title = "ProductQickView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #horizontalTab {
+        color: black;
+    }
+
+        #horizontalTab nav .nav-item {
+            color: black;
+        }
+
+            #horizontalTab nav .nav-item:hover {
+                background-color: #000;
+                color: white;
+            }
+
+        #horizontalTab nav .active {
+            background-color: #000;
+            color: white;
+        }
+</style>
+<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+    <div class="container">
+        <div class="inner-sec-shop pt-lg-4 pt-3">
+            <div class="row">
+                <div class="col-lg-4 single-right-left ">
+                    <div class="grid images_3_of_2">
+                        <div class="flexslider1">
+                            <ul class="slides">
+                                <li data-thumb="images/d2.jpg">
+                                    <div class="thumb-image">
+                                        <img width="350" height="400" src="@Model.ImageUrl" data-imagezoom="true" class="img-fluid" alt=" ">
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 single-right-left simpleCart_shelfItem">
+                    <h3>@Model.Name</h3>
+                    <p>
+                        @if (Model.SalePrice != null)
+                        {
+                            <span class="item_price">$@Model.SalePrice</span>
+                        }
+                        else
+                        {
+                            <del>$@Model.Price</del>
+                        }
+                    </p>
+                    <div class="rating1">
+                        <ul class="stars">
+                            @if (Model.Reate <= 1)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 2)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 3)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 4)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.Reate <= 5)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="#">
+                                        There are no reviews yet
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="occasional">
+                        <h5>Types :</h5>
+                        <div class="colr ert">
+                            <label class="radio"><input type="radio" name="radio" checked=""><i></i> Irayz Butterfly(Black)</label>
+                        </div>
+                        <div class="colr">
+                            <label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (Grey)</label>
+                        </div>
+                        <div class="colr">
+                            <label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (white)</label>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+
+                    @if (Session["User"] == null)
+                    {
+                        <a style="color:white; background-color:black; font-weight:bold" href="~/Account/Login" class=" btn googles-cart pgoogles-cart">
+                            Add to Cart
+                        </a>
+                    }
+                    else
+                    {
+                        <a style="color:white; background-color:black; font-weight:bold" href="~/Carts/AddToCart/@Model.Id" class=" btn googles-cart pgoogles-cart">
+                            Add to Cart
+                        </a>
+                    }
+                    <ul class="footer-social text-left mt-lg-4 mt-3">
+                        <li>Share On : </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fab fa-facebook-f"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fab fa-twitter"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fab fa-google-plus-g"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fab fa-linkedin-in"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fas fa-rss"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="clearfix"> </div>
+                <!--/tabs-->
+                <div class="responsive_tabs">
+                    <div id="horizontalTab">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reviews</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Information</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="single_page resp-tabs-container">
+                                    <h6>Lorem ipsum dolor sit amet</h6>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                        blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                        magna aliqua.
+                                    </p>
+                                    <p class="para">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                        blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                        magna aliqua.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="single_page resp-tabs-container">
+                                    <div class="bootstrap-tab-text-grids">
+                                        <div class="bootstrap-tab-text-grid">
+                                            <div class="bootstrap-tab-text-grid-left">
+                                                <img src="images/team1.jpg" alt=" " class="img-fluid">
+                                            </div>
+                                            <div class="bootstrap-tab-text-grid-right">
+                                                <ul>
+                                                    <li><a href="#">Admin</a></li>
+                                                    <li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
+                                                </ul>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam,
+                                                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+                                                    autem vel eum iure reprehenderit.
+                                                </p>
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                        <div class="add-review">
+                                            <h4>add a review</h4>
+                                            <form action="#" method="post">
+                                                <input class="form-control" type="text" name="Name" placeholder="Enter your email..." required="">
+                                                <input class="form-control" type="email" name="Email" placeholder="Enter your email..." required="">
+                                                <textarea name="Message" required=""></textarea>
+                                                <input type="submit" value="SEND">
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="single_page resp-tabs-container">
+                                    <h6>Irayz Butterfly Sunglasses  (Black)</h6>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                        blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                        magna aliqua.
+                                    </p>
+                                    <p class="para">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                        blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                        magna aliqua.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--//tabs-->
+            </div>
+        </div>
+    </div>
+</section>
+
+
