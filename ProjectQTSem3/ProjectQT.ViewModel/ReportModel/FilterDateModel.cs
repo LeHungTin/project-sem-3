@@ -10,6 +10,8 @@ namespace ProjectQT.ViewModel.ReportModel
     {
         public string NameProduct { get; set; }
         public string EndDate { get; set; }
+        public string MonthDate { get; set; }
+        public string YearDate { get; set; }
 
     }
 }

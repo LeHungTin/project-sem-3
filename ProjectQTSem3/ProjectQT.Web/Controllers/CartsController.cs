@@ -27,9 +27,10 @@ namespace ProjectQT.Web.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            
+            var listCart = Session["cart"] as List<CartModel>;
+            Session["cart"] = listCart;
+            ViewBag.lisCart = listCart;
             return View();
-
         }
 
         /// <summary>
@@ -42,10 +43,6 @@ namespace ProjectQT.Web.Controllers
             {
                 ViewData["login"] = "Please login to continue";
                 return RedirectToAction("Login", "Account");
-            }
-            if (id == null)
-            {
-                return View();
             }
             List<CartModel> listCart = new List<CartModel>();
             var product = _product.GetById(id);
@@ -72,8 +69,7 @@ namespace ProjectQT.Web.Controllers
                 listCart.Add(new CartModel { Products = product, Quantity = 1 });
             }
             Session["cart"] = listCart;
-            ViewBag.lisCart = listCart;
-            return View();
+            return RedirectToAction("Index");
         }
 
         /// <summary>

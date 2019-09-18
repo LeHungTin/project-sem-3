@@ -54,9 +54,9 @@
 
                                     <td class="invert">$@item.Products.Price</td>
                                     <td class="invert">
-                                        <div class="rem">
-                                            <div class="close1"></div>
-                                        </div>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-remove" style="color: black;"></span>
+                                        </a>
                                     </td>
                                 </tr>
                             }
@@ -72,9 +72,9 @@
             </div>
 
             <div class="row">
-                <div class="col-md-10 checkout-left-basket">
-                    <h4>Continue to basket</h4>
-                    <ul>
+                <div class="col-md-6 checkout-left-basket">
+                    <h4 style="background-color: #ff4e00; color: white; padding: 10px; text-align: center; font-weight: 100;">Continue to basket</h4>
+                    <table class="table">
 
                         @{
                             var sl = 0;
@@ -84,21 +84,23 @@
                                 var total = item.Products.Price * item.Quantity;
                                 totalMoney += total;
                                 sl += 1;
-                                <li>
-                                    Product(@sl)
-                                    <i>-</i>
-                                    @item.Products.Name
-                                    <i>-</i>
-                                    <span>$@total</span>
-                                </li>
+                                <tr>
+                                    <td>
+                                        Product(@sl)
+                                    </td>
+                                    <td>
+                                        @item.Products.Name
+                                    </td>
+                                    <td>$@total</td>
+                                </tr>
                             }
-                            <li>
-                                Total
-                                <i>-</i>
-                                <span>$@totalMoney</span>
-                            </li>
+                            <tr style="border-top: 1px solid #bbb; margin-bottom: 15px;">
+                                <td>Total</td>
+                                <td></td>
+                                <td>$@totalMoney</td>
+                            </tr>
                         }
-                    </ul>
+                    </table>
                     @using (Html.BeginForm("AddToCart", "Carts", FormMethod.Post))
                     {
                         @Html.HiddenFor(model => model.ProductId)
@@ -110,4 +112,5 @@
         </div>
     </div>
 </section>
+
 
