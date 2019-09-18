@@ -40,15 +40,11 @@
                     <th>
                         @Html.DisplayNameFor(model => model.CreateAt)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreateBy)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.UpdateAt)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UpdateBy)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
@@ -61,28 +57,24 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateAt)
-                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.CreateBy)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UpdateAt)
-                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.UpdateBy)
                         </td>
                         @if (item.Status == true)
                         {
                             <td>
-                                Kích hoạt &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
+                                Active &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
                             </td>
                         }
                         else
                         {
                             <td>
-                                Khóa &nbsp<i style="color : red" class="fa fa-times"></i>
+                                Block &nbsp<i style="color : red" class="fa fa-times"></i>
                             </td>
                         }
 

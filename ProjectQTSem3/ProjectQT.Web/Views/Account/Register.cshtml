@@ -3,67 +3,54 @@
     ViewBag.Title = "Register";
 }
 
-<div class=" container text-left">
-    <div class="wrap">
-        <div class="login p-5 bg-dark mx-auto mw-100">
-            <h5 class="text-center mb-4">Register</h5>
-            <div style="width: 60%; margin: 0 auto;">
-                <form action="Register" method="post">
-                    <div class="row mb-2">
-                        <label class="col-4">Email address :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-required="The Email field is required." id="Email" name="Email" type="text" value="">
-                            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-4">Password :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password" value="">
-                            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-4">Confirm Password :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-equalto="'ConfirmPassword' and 'Password' do not match." data-val-equalto-other="*.Password" data-val-required="The ConfirmPassword field is required." id="ConfirmPassword" name="ConfirmPassword" type="password" value="">
-                            @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-4">Full Name :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-required="The FullName field is required." id="FullName" name="FullName" type="text" value="">
-                            @Html.ValidationMessageFor(model => model.FullName, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-4">Birthday :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-date="The field BirthDay must be a date." data-val-required="The BirthDay field is required." id="BirthDay" name="BirthDay" type="date" value="">
-                            @Html.ValidationMessageFor(model => model.BirthDay, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-4">Phone Number :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-required="The PhoneNumber field is required." id="PhoneNumber" name="PhoneNumber" type="text" value="">
-                            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-4">Address :</label>
-                        <div class="col-8">
-                            <input style="width: 100%;" data-val="true" data-val-required="The Address field is required." id="Address" name="Address" type="text" value="">
-                            @Html.ValidationMessageFor(model => model.Address, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary submit mb-4">Register</button>
-                    <br />
-                </form>
+<h5 class="text-center mb-4">Register</h5>
+<div style="width: 60%; margin: 0 auto; border: 2px solid aliceblue; padding: 20px 20px 5px 20px;">
+    <form action="Register" method="post">
+        <div class="row mb-2">
+            <label class="col-4">Email address</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-required="The Email field is required." id="Email" name="Email" type="text" value="" aria-describedby="Email-error" class="valid" aria-invalid="false">                @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+        <div class="row mb-2">
+            <label class="col-4">Password</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password" value="" aria-describedby="Password-error" class="valid" aria-invalid="false">                @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label class="col-4">Confirm Password</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-equalto="'ConfirmPassword' and 'Password' do not match." data-val-equalto-other="*.Password" data-val-required="The ConfirmPassword field is required." id="ConfirmPassword" name="ConfirmPassword" type="password" value="">                @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label class="col-4">Full Name</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-required="The FullName field is required." id="FullName" name="FullName" type="text" value="">                @Html.ValidationMessageFor(model => model.FullName, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label class="col-4">Birthday</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-date="The field BirthDay must be a date." data-val-required="The BirthDay field is required." id="BirthDay" name="BirthDay" type="date" value="">                @Html.ValidationMessageFor(model => model.BirthDay, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label class="col-4">Phone Number</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-required="The PhoneNumber field is required." id="PhoneNumber" name="PhoneNumber" type="text" value="">                @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label class="col-4">Address</label>
+            <div class="col-8">
+                <input style="width: 100%;" class="form-control" data-val="true" data-val-required="The Address field is required." id="Address" name="Address" type="text" value="">                @Html.ValidationMessageFor(model => model.Address, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary submit mb-4">Register</button>
+        <br />
+    </form>
 </div>
 
 @section scripts{

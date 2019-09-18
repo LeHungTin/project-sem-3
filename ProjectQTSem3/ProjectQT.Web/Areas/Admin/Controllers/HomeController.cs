@@ -5,7 +5,6 @@ using ProjectQT.ViewModel.OrderModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {

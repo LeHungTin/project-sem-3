@@ -53,7 +53,7 @@ namespace ProjectQT.Web.Controllers
                 Session["roleId"] = user.GroupId;
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.err = "Sai tài khoản hoặc mật khẩu!";
+            ViewBag.err = "Wrong account or password!";
             return View();
         }
 
@@ -97,9 +97,10 @@ namespace ProjectQT.Web.Controllers
                     Helper.SendMail(user.Email, "quangciucuca@gmail.com", "Anhquang1009", "QTShop_Đăng ký tài khoản", string.Format(@"
                     <h1> Đăng ký tài khoản thành công</h1>
                     <b>Email đăng ký :</b> {0}
+                    <p>Visit: https://localhost:44341</p>
                     <p>Trân trọng </p>
                     ", user.Email));
-                    TempData["RigisterSucess"] = "Đăng ký tài khoản thành công.";
+                    TempData["RigisterSucess"] = "Register successfully!";
                     return RedirectToAction("Login");
                 }
                 return View(registerViewModel);
