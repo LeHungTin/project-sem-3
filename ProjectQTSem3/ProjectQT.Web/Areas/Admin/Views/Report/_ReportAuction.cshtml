@@ -1,30 +1,9 @@
 ﻿@model List<ProjectQT.ViewModel.ReportModel.OrderReport>
 @{
     var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var xLabels = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.xLabels);
-    var yValues = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.yValues);
-    var y2Values = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.y2Values);
+
 }
-<div class="col-12 no-print">
-    <div class="card card-info">
-        <div class="card-header">
-            <h3 class="card-title">
-                Revenue statistics chart
-            </h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="chart">
-                <canvas id="chart" style="height:500px"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="col-12">
     <div class="card card-info">
         <div class="card-header no-print">
@@ -42,7 +21,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h4>
-                            <i class="fas fa-globe"></i> Auction
+                            <i class="fas fa-globe"></i> <b>QTShop</b>
                             <small class="float-right">Date: @DateTime.Now.ToString("dd-MM-yyyy")</small>
                         </h4>
                     </div>
@@ -112,79 +91,10 @@
                 </div>
                 <div class="row no-print">
                     <div class="col-12">
-                        <button onclick="printDiv('loadReport')" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+                        <button onclick="printReport()" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-        $(function () {
-    var chartName = "chart";
-        var ctx = document.getElementById(chartName).getContext('2d');
-        var data = {
-                labels: @Html.Raw(xLabels),
-                datasets: [
-                  {
-                    label               : 'Buys',
-                    backgroundColor     : 'rgba(60,141,188,0.9)',
-                    borderColor         : 'rgba(60,141,188,0.8)',
-                    pointRadius          : false,
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : @Html.Raw(yValues),
-                  },
-                  {
-                    label               : 'Views',
-                    backgroundColor     : 'rgba(210, 214, 222, 1)',
-                    borderColor         : 'rgba(210, 214, 222, 1)',
-                    pointRadius         : false,
-                    pointColor          : 'rgba(210, 214, 222, 1)',
-                    pointStrokeColor    : '#c1c7d1',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data                : @Html.Raw(y2Values),
-                  }
-                ]
-            };
-
-var options = {
-                maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            min: 0,
-                            beginAtZero: true,
-
-                        },
-                        gridLines: {
-                            display: true,
-                            color: "rgba(255,99,164,0.2)"
-                        }
-}],
-                    xAxes: [{
-                        ticks: {
-                            min: 0,
-                            beginAtZero: true
-                        },
-                        gridLines: {
-                            display: false
-                        }
-                    }]
-
-                },
-                tooltips: {
-
-                }
-
-            };
-           var myChart = new  Chart(ctx, {
-                    options: options,
-                    data: data,
-                    type:'bar'
-                });
-            });
-</script>

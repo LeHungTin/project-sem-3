@@ -18,6 +18,8 @@ namespace ProjectQT.Web.Controllers
         public ActionResult Index()
         {
             var product = _Product.GetAll();
+            ViewBag.ProductViews = product.OrderByDescending(x => x.CountView);
+            ViewBag.ProductSales= product.OrderByDescending(x => x.CountBuy);
             return View(product);
         }
 

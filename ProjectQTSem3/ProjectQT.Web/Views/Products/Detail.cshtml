@@ -156,19 +156,18 @@
                         </ul>
                     </div>
                     <div class="occasional">
-                        <h5>Types :</h5>
-                        <div class="colr ert">
-                            <label class="radio"><input type="radio" name="radio" checked=""><i></i> Irayz Butterfly(Black)</label>
-                        </div>
-                        <div class="colr">
-                            <label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (Grey)</label>
-                        </div>
-                        <div class="colr">
-                            <label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (white)</label>
-                        </div>
+                        @foreach (var type in ViewBag.types)
+                        {
+                            <h5>@type.TypeName</h5>
+                            <select class="mdb-select md-form">
+                                @foreach (var item in type.Attributes)
+                                {
+                                        <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        }
                         <div class="clearfix"> </div>
                     </div>
-
                     @if (Session["User"] == null)
                     {
                         <a style="color:white; background-color:black; font-weight:bold" href="~/Account/Login" class=" btn googles-cart pgoogles-cart">
