@@ -48,6 +48,7 @@ TestResults/
 *.tar
 *.zip
 *.vs
+*.csproj
 ######################
 # Logs and databases #
 ######################
