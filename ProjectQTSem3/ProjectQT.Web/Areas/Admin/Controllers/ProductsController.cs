@@ -177,6 +177,9 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                 product.UpdateAt = DateTime.Now;
                 product.UpdateBy = user.Email;
                 product.CreateBy = user.Id;
+                product.Reate = 5;
+                product.CountBuy = 0;
+                product.CountView = 0;
                 if (_product.Update(product))
                 {
                     TempData["UpdateSuccess"] = "Update Success";

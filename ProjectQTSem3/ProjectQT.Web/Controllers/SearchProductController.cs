@@ -1,7 +1,7 @@
 ﻿using ProjectQT.BAL.Repositories;
 using ProjectQT.DataModel.Models;
 using ProjectQT.ViewModel.ProductModel;
-using ProjectQT.ViewModel.SeachProductModel;
+using ProjectQT.ViewModel.SeachProduct;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,7 +18,7 @@ namespace ProjectQT.Web.Controllers
         {
             _product = new GenericRepository<Product>();
         }
-        public IEnumerable<Product> GetProduct(SeachProductModel dateModel)
+        public IEnumerable<Product> GetProduct(SeachProduct dateModel)
         {
             var listProduct = _product.GetAll().OrderByDescending(x => x.Reate);
             if (!string.IsNullOrEmpty(dateModel.ProductName))
@@ -66,7 +66,7 @@ namespace ProjectQT.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult FilterProduct(SeachProductModel dateModel)
+        public ActionResult FilterProduct(SeachProduct dateModel)
         {
             var listProduct = GetProduct(dateModel).ToList();
             return PartialView("_SeachProduct", listProduct);
