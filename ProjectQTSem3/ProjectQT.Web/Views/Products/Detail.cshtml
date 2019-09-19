@@ -159,7 +159,7 @@
                         @foreach (var type in ViewBag.types)
                         {
                             <h5>@type.TypeName</h5>
-                            <select class="mdb-select md-form">
+                            <select class="form-control" style="width: 150px;">
                                 @foreach (var item in type.Attributes)
                                 {
                                         <option value="@item.Id">@item.Name</option>
