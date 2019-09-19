@@ -66,10 +66,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="col-md-3 top-info-cart text-right mt-lg-4">
                         <ul class="cart-inner-info">
                             <li class="button-log">
-                                <a href="~/Admin/Home"><i class="fa fa-user"></i><b> Quản lý admin</b></a>
-                                <a class="layout-famyli" href="~/Account/LogOut">
-                                    <i class="fas fa-sign-out-alt"></i><b> Sigout</b>
-                                </a>
+                                @if (user.GroupId == 1)
+                                {
+                                    <a href="~/Admin/Home"><i class="fa fa-user"></i><b> Quản lý admin</b></a>
+                                    <a class="layout-famyli" href="~/Account/LogOut">
+                                        <i class="fas fa-sign-out-alt"></i><b> Sigout</b>
+                                    </a>
+
+                                }
+                                else
+                                {
+                                    <div class="dropdown" style="position: relative;">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                                            Profile
+                                        </button>
+                                        <div class="dropdown-menu" style="position: absolute; right: 0%; left: unset;">
+                                            <a class="dropdown-item" href="/users/index/@user.Id">Your profile</a>
+                                            <a class="dropdown-item" href="/users/OrderHistory/@user.Id">Order history</a>
+                                            <a class="dropdown-item" href="/users/ChangePassword/@user.Id">Change password</a>
+                                            <a class="dropdown-item" href="~/Account/LogOut">
+                                               Sigout
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+
                             </li>
                         </ul>
                     </div>
