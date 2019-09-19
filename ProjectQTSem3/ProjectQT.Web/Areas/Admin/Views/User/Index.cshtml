@@ -31,6 +31,10 @@
         {
             <h3 class="alert alert-danger lisproduct-alert">@TempData["DeleteFalse"] </h3>
         }
+        @if (TempData["LockFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["LockFalse"] </h3>
+        }
         @if (TempData["LockSuccess"] != null)
         {
             <h3 class="alert alert-success lisproduct-alert">@TempData["LockSuccess"] </h3>

@@ -1,9 +1,46 @@
-﻿@model ProjectQT.DataModel.Models.Product
+﻿@model ProjectQT.DataModel.Models.Feedback
+
+@using ProjectQT.DataModel.Models
 @{
     ViewBag.Title = "ProductQickView";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Product product = ViewBag.Product as Product;
+    List<Feedback> listFeedback = ViewBag.listFeedback as List<Feedback>;
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 <style>
+
+
+    .starrating > input {
+        display: none;
+    }
+    /* Remove radio buttons */
+
+    .starrating > label:before {
+        content: "\f005"; /* Star */
+        margin: 1px;
+        font-size: 4em;
+        font-family: FontAwesome;
+        display: inline-block;
+    }
+
+    .starrating > label {
+        color: #222222; /* Start color when not clicked */
+    }
+
+    .starrating > input:checked ~ label {
+        color: #ffca08;
+    }
+    /* Set yellow color when star checked */
+
+    .starrating > input:hover ~ label {
+        color: #ffca08;
+    }
+    /* Set yellow color when star hover */
+
+
+
     #horizontalTab {
         color: black;
     }
@@ -21,6 +58,10 @@
             background-color: #000;
             color: white;
         }
+
+    .checked {
+        color: orange;
+    }
 </style>
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
     <div class="container">
@@ -32,7 +73,7 @@
                             <ul class="slides">
                                 <li data-thumb="images/d2.jpg">
                                     <div class="thumb-image">
-                                        <img width="350" height="400" src="@Model.ImageUrl" data-imagezoom="true" class="img-fluid" alt=" ">
+                                        <img width="350" height="400" src="@product.ImageUrl" data-imagezoom="true" class="img-fluid" alt=" ">
                                     </div>
                                 </li>
                             </ul>
@@ -41,119 +82,65 @@
                     </div>
                 </div>
                 <div class="col-lg-8 single-right-left simpleCart_shelfItem">
-                    <h3>@Model.Name</h3>
+                    <h3>@product.Name</h3>
                     <p>
-                        @if (Model.SalePrice != null)
+                        @if (product.SalePrice != null)
                         {
-                            <span class="item_price">$@Model.SalePrice</span>
+                            <del class="item_price">$@product.Price</del>
+                            <span >$@product.SalePrice</span>
                         }
                         else
                         {
-                            <del>$@Model.Price</del>
+                            <span>$@product.Price</span>
                         }
                     </p>
                     <div class="rating1">
-                        <ul class="stars">
-                            @if (Model.Reate <= 1)
-                            {
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                            }
-                            else if (Model.Reate <= 2)
-                            {
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                            }
-                            else if (Model.Reate <= 3)
-                            {
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                            }
-                            else if (Model.Reate <= 4)
-                            {
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                            }
-                            else if (Model.Reate <= 5)
-                            {
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li>
-                                    <a href="#">
-                                        There are no reviews yet
-                                    </a>
-                                </li>
-                            }
-
-                        </ul>
+                        @if (product.Reate <= 1)
+                        {
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        }
+                        else if (product.Reate <= 2)
+                        {
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        }
+                        else if (product.Reate <= 3)
+                        {
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        }
+                        else if (product.Reate <= 4)
+                        {
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        }
+                        else if (product.Reate <= 5)
+                        {
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                            <span style="color:orange" class="fa fa-star"></span>
+                        }
+                        else
+                        {
+                            <a href="#">
+                                There are no reviews yet
+                            </a>
+                        }
                     </div>
                     <div class="occasional">
                         @foreach (var type in ViewBag.types)
@@ -162,21 +149,21 @@
                             <select class="form-control" style="width: 150px;">
                                 @foreach (var item in type.Attributes)
                                 {
-                                        <option value="@item.Id">@item.Name</option>
+                                    <option value="@item.Id">@item.Name</option>
                                 }
                             </select>
                         }
                         <div class="clearfix"> </div>
                     </div>
-                    @if (Session["User"] == null)
+                    @if (Session["User"] != null)
                     {
-                        <a style="color:white; background-color:black; font-weight:bold" href="~/Account/Login" class=" btn googles-cart pgoogles-cart">
+                        <a style="color:white; background-color:black; font-weight:bold" href="~/Carts/AddToCart/@product.Id" class=" btn googles-cart pgoogles-cart">
                             Add to Cart
                         </a>
                     }
                     else
                     {
-                        <a style="color:white; background-color:black; font-weight:bold" href="~/Carts/AddToCart/@Model.Id" class=" btn googles-cart pgoogles-cart">
+                        <a style="color:white; background-color:black; font-weight:bold" href="~/Account/Login" class=" btn googles-cart pgoogles-cart">
                             Add to Cart
                         </a>
                     }
@@ -241,33 +228,135 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <div class="single_page resp-tabs-container">
+                                <div style="min-width:1140px" class="single_page resp-tabs-container">
+                                    @if (listFeedback == null)
+                                    {
+                                        <span>The product has no reviews</span>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in listFeedback)
+                                        {
+                                            <div class="bootstrap-tab-text-grid">
+                                                <div class="bootstrap-tab-text-grid-left">
+                                                    <img src="~/Content/images/avatar.png" alt=" " class="img-fluid">
+                                                </div>
+
+                                                <div class="bootstrap-tab-text-grid-right">
+                                                    <ul>
+                                                        <li><a href="#">@item.Users.Email</a></li>
+                                                        <li style="color:#109e22">
+                                                            @if (item.existOrder == true)
+                                                            {
+                                                                <i class="fa fa-check-circle"> Đã mua sản phẩm</i>
+                                                            }
+                                                        </li>
+                                                    </ul>
+                                                    <div class="rating1">
+                                                        @if (item.FeedbackStar <= 1)
+                                                        {
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                        }
+                                                        else if (item.FeedbackStar <= 2)
+                                                        {
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+
+                                                        }
+                                                        else if (item.FeedbackStar <= 3)
+                                                        {
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+
+                                                        }
+                                                        else if (item.FeedbackStar <= 4)
+                                                        {
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                        }
+                                                        else if (item.FeedbackStar <= 5)
+                                                        {
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                            <span style="color:orange" class="fa fa-star"></span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#">
+                                                                There are no reviews yet
+                                                            </a>
+                                                        }
+                                                    </div>
+                                                    <p><b>@item.Title</b></p>
+                                                    <p>
+                                                        @item.Content
+                                                    </p>
+                                                    <div style="display:none" id="myDIV">
+                                                        <br />
+                                                        <h4>Content Reply</h4>
+                                                        <form action="CreateFeedback" method="post">
+                                                            <textarea style="width:100%" name="Message" required=""></textarea>
+                                                            <input style="float:right" class="btn btn-success" type="submit" value="SEND">
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <div class="clearfix"> </div>
+                                            </div>
+
+                                        }
+
+                                    }
+
                                     <div class="bootstrap-tab-text-grids">
-                                        <div class="bootstrap-tab-text-grid">
-                                            <div class="bootstrap-tab-text-grid-left">
-                                                <img src="images/team1.jpg" alt=" " class="img-fluid">
-                                            </div>
-                                            <div class="bootstrap-tab-text-grid-right">
-                                                <ul>
-                                                    <li><a href="#">Admin</a></li>
-                                                    <li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
-                                                </ul>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam,
-                                                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
-                                                    autem vel eum iure reprehenderit.
-                                                </p>
-                                            </div>
-                                            <div class="clearfix"> </div>
-                                        </div>
                                         <div class="add-review">
-                                            <h4>add a review</h4>
-                                            <form action="#" method="post">
-                                                <input class="form-control" type="text" name="Name" placeholder="Enter your email..." required="">
-                                                <input class="form-control" type="email" name="Email" placeholder="Enter your email..." required="">
-                                                <textarea name="Message" required=""></textarea>
-                                                <input type="submit" value="SEND">
-                                            </form>
+                                            @using (Html.BeginForm("CreateFeedback", "Products", FormMethod.Post))
+                                            {
+                                                <h3><b>add a review</b></h3>
+                                                <br />
+                                                <h5><b>Feedback star rating for the product</b></h5>
+                                                <hr />
+                                                <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                                                    <input type="radio" id="star5" name="FeedbackStar" value="5" /><label for="star5" title="5 star"></label>
+                                                    <input type="radio" id="star4" name="FeedbackStar" value="4" /><label for="star4" title="4 star"></label>
+                                                    <input type="radio" id="star3" name="FeedbackStar" value="3" /><label for="star3" title="3 star"></label>
+                                                    <input type="radio" id="star2" name="FeedbackStar" value="2" /><label for="star2" title="2 star"></label>
+                                                    <input type="radio" id="star1" name="FeedbackStar" value="1" /><label for="star1" title="1 star"></label>
+                                                </div>
+                                                <hr />
+                                                <h5><b>Feedback</b></h5>
+                                                <br />
+                                                <h4><b>Title</b></h4>
+                                                <textarea name="Title" style="min-height:45px" required=""></textarea>
+                                                <h4><b>Content Feedback</b></h4>
+                                                <textarea name="Content" required=""></textarea>
+                                                <input type="hidden" name="ProductId" value="@product.Id" />
+                                                if (Session["User"] == null)
+                                                {
+                                                    <a style="color:white; background-color:#ff4e00;width:215px; height: 52px; padding-top:14px; font-weight:bold" href="~/Account/Login" class=" btn googles-cart pgoogles-cart">
+                                                        SEND
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <input type="submit" value="SEND">
+                                                }
+                                            }
                                         </div>
                                     </div>
 
@@ -298,5 +387,16 @@
         </div>
     </div>
 </section>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 
 

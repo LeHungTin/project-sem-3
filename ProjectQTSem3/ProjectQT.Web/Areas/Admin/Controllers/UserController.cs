@@ -44,6 +44,11 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         public ActionResult LockUser(int id)
         {
             var user = _user.GetById(id);
+            if (user.GroupId == 1)
+            {
+                TempData["LockFalse"] = "Lock User False";
+                return RedirectToAction("Index");
+            }
             user.Status = false;
             _user.Update(user);
             TempData["LockSuccess"] = "Lock User Success";

@@ -23,6 +23,5 @@ namespace ProjectQT.DataModel.Models
         public virtual DbSet<TypeAttribute> TypeAttributes { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
 
-
     }
 }
