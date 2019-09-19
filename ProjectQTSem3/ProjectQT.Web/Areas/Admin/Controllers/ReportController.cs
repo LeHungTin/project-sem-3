@@ -51,7 +51,11 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
             {
                 listOrderDetail = listOrderDetail.Where(s => s.ProductId.ToLower().Contains(dateModel.NameProduct.ToLower()));
             }
-
+            if (string.IsNullOrEmpty(dateModel.NameProduct) && string.IsNullOrEmpty(dateModel.EndDate) 
+                && string.IsNullOrEmpty(dateModel.MonthDate) && string.IsNullOrEmpty(dateModel.YearDate))
+            {
+                listOrderDetail = listOrderDetail.Take(10);
+            }
 
             if (!string.IsNullOrEmpty(dateModel.EndDate))
             {
@@ -71,7 +75,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                 listOrderDetail = listOrderDetail.Where(d => d.CreateAt.Year == yearDate.Year);
                 var count = listOrderDetail.Count();
             }
-            return listOrderDetail.Take(10);
+            return listOrderDetail.OrderByDescending(x => x.CreateAt);
         }
 
         // GET: Admin/Report

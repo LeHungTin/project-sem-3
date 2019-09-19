@@ -64,7 +64,9 @@
     <Compile Include="ReportModel\FilterDateModel.cs" />
     <Compile Include="ReportModel\OrderReport.cs" />
     <Compile Include="RevenueModel\RevenueModel.cs" />
+    <Compile Include="SeachProduct\SeachProduct.cs" />
     <Compile Include="TypeAttributeModel\TypeAttributeModel.cs" />
+    <Compile Include="UserModel\ChangePassword.cs" />
     <Compile Include="UserModel\UpdateUserModel.cs" />
     <Compile Include="UserModel\UserModel.cs" />
   </ItemGroup>
