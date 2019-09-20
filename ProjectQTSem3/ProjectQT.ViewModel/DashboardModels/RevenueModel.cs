@@ -9,6 +9,6 @@ namespace ProjectQT.ViewModel.DashboardModels
     public class RevenueModel
     {
         public DateTime Date { get; set; }
-        public decimal Money { get; set; }
+        public decimal? Money { get; set; }
     }
 }

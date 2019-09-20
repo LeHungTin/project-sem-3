@@ -15,7 +15,7 @@ namespace ProjectQT.ViewModel.OrderModel
         public string ProductId { get; set; }
         public int Quantity { get; set; }
         public List<string> NameAttr { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public bool Status { set; get; }
 
     }

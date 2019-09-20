@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class AttributesController : Controller
     {
 
@@ -31,6 +31,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Attributes
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
         public ActionResult Index()
         {
             var listAttribute = from attribue in _attribute.GetAll()
@@ -57,6 +58,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
         public ActionResult Detail(int? id)
         {
             var atrribute = _attribute.GetById(id);
@@ -83,6 +85,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Attributes
         [HttpGet]
+        [CustomizeAuth(Roles = "Add New")]
         public ActionResult Create()
         {
             ViewBag.TypeId = new SelectList(_Typeattribute.GetAll(), "Id", "TypeName");
@@ -138,6 +141,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Update")]
         public ActionResult Edit(int? id)
         {
             var category = _attribute.GetById(id);
@@ -204,6 +208,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Delete")]
         public ActionResult Delete(int? id)
         {
             try

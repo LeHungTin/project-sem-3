@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class CategoriesController : Controller
     {
         GenericRepository<Category> _category;
@@ -27,6 +27,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Admin/Categories
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Index()
         {
             var listCategory = from category in _category.GetAll()
@@ -50,6 +52,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Detail(int? id)
         {
             var category = _category.GetById(id);
@@ -61,6 +65,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Add New")]
         public ActionResult Create()
         {
             return View();
@@ -113,6 +118,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Update")]
         public ActionResult Edit(int? id)
         {
             var category = _category.GetById(id);
@@ -175,6 +181,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Delete")]
         public ActionResult Delete(int? id)
         {
             try

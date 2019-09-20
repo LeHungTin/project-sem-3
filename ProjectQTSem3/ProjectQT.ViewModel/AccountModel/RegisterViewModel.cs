@@ -10,6 +10,7 @@ namespace ProjectQT.ViewModel.AccountModel
         public int CreateBy { set; get; }
         public bool Status { set; get; }
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
         [StringLength(15, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 15 characters")]

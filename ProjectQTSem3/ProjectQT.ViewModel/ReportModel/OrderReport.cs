@@ -14,7 +14,7 @@ namespace ProjectQT.ViewModel.ReportModel
         public int OrderId { get; set; }
         public string ProductId { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public bool Status { set; get; }
         public float? Reate { get; set; }
         public int? CountBuy { get; set; }

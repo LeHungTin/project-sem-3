@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class GroupsController : Controller
     {
         GenericRepository<Group> _group;
@@ -30,6 +30,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Groups
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Index()
         {
             ViewBag.Business = _business.GetAll();
@@ -44,6 +46,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Groups
         [HttpGet]
+        [CustomizeAuth(Roles = "Add New")]
         public ActionResult Create()
         {
             return View();
@@ -55,6 +58,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Groups
         [HttpPost]
+        [CustomizeAuth(Roles = "Add New")]
         public ActionResult Create(Group group)
         {
             if (ModelState.IsValid)
@@ -94,6 +98,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Delete")]
         public ActionResult Delete(int? id)
         {
             try

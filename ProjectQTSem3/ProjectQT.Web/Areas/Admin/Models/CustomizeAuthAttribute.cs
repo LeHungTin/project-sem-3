@@ -14,7 +14,7 @@ namespace ProjectQT.Web.Areas.Admin.Models
             {
                 return false;
             }
-            if (HttpContext.Current.Session["roleId"].ToString() != "1")
+            if (HttpContext.Current.Session["roleId"].ToString() != "1" && HttpContext.Current.Session["roleId"].ToString() != "2")
             {
                 return false;
             }

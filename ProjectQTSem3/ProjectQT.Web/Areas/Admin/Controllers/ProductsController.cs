@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class ProductsController : Controller
     {
         GenericRepository<Product> _product;
@@ -37,6 +37,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Products
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
         public ActionResult Index()
         {
             var listProduct = _product.GetAll().AsQueryable().Include(x => x.Categorie);
@@ -49,6 +50,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Products
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
         public ActionResult Detail(int? id)
         {
             var listProduct = from pro in _product.GetAll()
@@ -82,6 +84,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Create")]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(_category.GetAll().Where(x => x.Status == true), "Id", "Name");
@@ -93,6 +96,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// Action Create Product Method POST 
         /// </summary>
         /// <returns></returns>
+        [CustomizeAuth(Roles = "Add New")]
         [HttpPost]
         public ActionResult Create(Product product)
         {
@@ -134,7 +138,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// Action Edit Product Method GET 
         /// </summary>
         /// <returns></returns>
-        //[CustomizeAuth(Roles = "Update")]
+        [CustomizeAuth(Roles = "Update")]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -148,7 +152,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// Action Edit Product Method POST 
         /// </summary>
         /// <returns></returns>
-        //[CustomizeAuth(Roles = "Update")]
+        [CustomizeAuth(Roles = "Update")]
         [HttpPost]
         public ActionResult Edit(Product product)
         {
@@ -200,6 +204,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Delete")]
         public ActionResult Delete(int? id)
         {
             try

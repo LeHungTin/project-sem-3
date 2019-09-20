@@ -20,7 +20,7 @@ namespace ProjectQT.Web.Controllers
         }
         public IEnumerable<Product> GetProduct(SeachProduct dateModel)
         {
-            var listProduct = _product.GetAll().OrderByDescending(x => x.Reate);
+            var listProduct = _product.GetAll().OrderByDescending(x => x.Reate).Take(12);
             if (!string.IsNullOrEmpty(dateModel.ProductName))
             {
                 listProduct = listProduct.Where(s => s.Name.ToLower().Contains(dateModel.ProductName.ToLower())).OrderByDescending(x => x.Reate);
@@ -61,7 +61,7 @@ namespace ProjectQT.Web.Controllers
         // GET: SearchProduct
         public ActionResult Index()
         {
-            ViewBag.ListProduct = _product.GetAll().AsQueryable().Include(x => x.Categorie);
+            ViewBag.ListProduct = _product.GetAll().AsQueryable().Include(x => x.Categorie).OrderByDescending(x => x.Reate);
             return View();
         }
 

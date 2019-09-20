@@ -112,7 +112,7 @@ namespace ProjectQT.Web.Controllers
                 user.Address = registerViewModel.Address;
                 user.CreateAt = DateTime.Now;
                 user.UpdateAt = DateTime.Now;
-                user.GroupId = 2;
+                user.GroupId = 3;
                 user.Status = true;
                 if (_repositoryUser.GetAll().FirstOrDefault(x => x.Email == user.Email) != null)
                 {

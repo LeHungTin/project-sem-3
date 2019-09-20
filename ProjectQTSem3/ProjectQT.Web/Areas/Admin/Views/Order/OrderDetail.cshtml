@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "OrderDetail";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    decimal totalMoney = 0;
+    decimal? totalMoney = 0;
     IEnumerable<OrderDetailModel> listOrderDetail = ViewBag.OrderDetail as IEnumerable<OrderDetailModel>;
 }
 <div class="container">

@@ -8,6 +8,8 @@ namespace ProjectQT.DataModel.Models
     {
         [Key]
         public int GroupId { get; set; }
+        [Required]
+
         public string GroupName { get; set; }
         public DateTime CreateAt { set; get; }
         public int CreateBy { set; get; }

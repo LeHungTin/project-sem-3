@@ -61,6 +61,11 @@ namespace ProjectQT.Web.Controllers
             var _attributes = Request["attributes"].ToString();
             // Lấy số lượng
             var qty = Convert.ToInt32(Request["qty"]);
+            if (qty<=0)
+            {
+                TempData["err"]= "Quantity must be greater than zero";
+                return RedirectToAction("Detail", "Products", new { id = id });
+            }
             CartModel cart = new CartModel()
             {
                 Products = product,
@@ -131,31 +136,61 @@ namespace ProjectQT.Web.Controllers
 
             foreach (var item in Listcart)
             {
-                var oderDetail = new OrderDetail()
+                if (item.Products.SalePrice == null)
                 {
-                    OrderId = orderModel.Id,
-                    ProductId = item.Products.Id,
-                    Quantity = item.Quantity,
-                    Price = item.Quantity * item.Products.Price,
-                    CreateBy = user.Id,
-                    CreateAt = DateTime.Now
-                };
-                _orderDetail.Create(oderDetail);
-                var product = _product.GetBy(x => x.Id == item.Products.Id);
-                product.CountBuy += item.Quantity;
-                _product.Update(product);
-
-                var listIdAttr = item.Attrs.Split(',');
-
-                foreach (var item1 in listIdAttr)
-                {
-                    var proDetailAttr = new ProductDetailOrder
+                    var oderDetail = new OrderDetail()
                     {
-                        OrderDeltailId = oderDetail.Id,
-                        NameAtt = _attribute.GetById(Convert.ToInt32(item1)).Name
+                        OrderId = orderModel.Id,
+                        ProductId = item.Products.Id,
+                        Quantity = item.Quantity,
+                        Price = item.Quantity * item.Products.Price,
+                        CreateBy = user.Id,
+                        CreateAt = DateTime.Now
                     };
-                    _productDetailOrder.Create(proDetailAttr);
+                    _orderDetail.Create(oderDetail);
+                    var product = _product.GetBy(x => x.Id == item.Products.Id);
+                    product.CountBuy += item.Quantity;
+                    _product.Update(product);
+                    var listIdAttr = item.Attrs.Split(',');
+                    foreach (var item1 in listIdAttr)
+                    {
+                        var proDetailAttr = new ProductDetailOrder
+                        {
+                            OrderDeltailId = oderDetail.Id,
+                            NameAtt = _attribute.GetById(Convert.ToInt32(item1)).Name
+                        };
+                        _productDetailOrder.Create(proDetailAttr);
+                    }
                 }
+                else
+                {
+                    var oderDetail = new OrderDetail()
+                    {
+                        OrderId = orderModel.Id,
+                        ProductId = item.Products.Id,
+                        Quantity = item.Quantity,
+                        Price = item.Quantity * item.Products.SalePrice,
+                        CreateBy = user.Id,
+                        CreateAt = DateTime.Now
+                    };
+                    _orderDetail.Create(oderDetail);
+                    var product = _product.GetBy(x => x.Id == item.Products.Id);
+                    product.CountBuy += item.Quantity;
+                    _product.Update(product);
+
+                    var listIdAttr = item.Attrs.Split(',');
+
+                    foreach (var item1 in listIdAttr)
+                    {
+                        var proDetailAttr = new ProductDetailOrder
+                        {
+                            OrderDeltailId = oderDetail.Id,
+                            NameAtt = _attribute.GetById(Convert.ToInt32(item1)).Name
+                        };
+                        _productDetailOrder.Create(proDetailAttr);
+                    }
+                }
+
             }
             Session.Remove("cart");
             return RedirectToAction("Index", "Home");

@@ -1,13 +1,14 @@
 ﻿using ProjectQT.BAL.Repositories;
 using ProjectQT.DataModel.Models;
 using ProjectQT.ViewModel.TypeAttributeModel;
+using ProjectQT.Web.Areas.Admin.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class TypeAttributeController : Controller
     {
         GenericRepository<TypeAttribute> _typeAttribute;
@@ -25,6 +26,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Admin/TypeAttribute
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Index()
         {
             var listTypeAttributes = from typeAttribue in _typeAttribute.GetAll()
@@ -46,6 +49,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Add New")]
         public ActionResult Create()
         {
             return View();
@@ -94,6 +98,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Update")]
         public ActionResult Edit(int id)
         {
             var TypeAttribute = _typeAttribute.GetById(id);
@@ -122,6 +127,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Delete")]
         public ActionResult Delete(int? id)
         {
             try

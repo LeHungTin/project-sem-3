@@ -4,7 +4,7 @@
     ViewBag.Title = "OrderDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    decimal totalMoney = 0;
+    decimal? totalMoney = 0;
     IEnumerable<OrderDetailModel> listOrderDetail = ViewBag.OrderDetail as IEnumerable<OrderDetailModel>;
 }
 <div class="banner_inner mb-2">

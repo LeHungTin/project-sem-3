@@ -67,6 +67,7 @@ namespace ProjectQT.Web.Controllers
             var user = _User.GetById(changePassword.Id);
             user.Password = MD5Hash(changePassword.Password);
             _User.Update(user);
+            TempData["UpdateSuccess"] = "Update Success";
             return RedirectToAction("Login", "Account");
         }
 

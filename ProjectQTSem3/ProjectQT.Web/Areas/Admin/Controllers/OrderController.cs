@@ -1,12 +1,15 @@
 ﻿using ProjectQT.BAL.Repositories;
 using ProjectQT.DataModel.Models;
 using ProjectQT.ViewModel.OrderModel;
+using ProjectQT.Web.Areas.Admin.Models;
 using ProjectQT.Web.Models;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
+    [CustomizeAuth]
+
     public class OrderController : Controller
     {
         GenericRepository<Order> _order;
@@ -28,6 +31,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// Action Get All Order
         /// </summary>
         /// <returns></returns>
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Index()
         {
             var orderModel = from order in _order.GetAll()
@@ -51,6 +56,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// Action Get OrderDetail Method get
         /// </summary>
         /// <returns></returns>
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult OrderDetail(int id)
         {
 
