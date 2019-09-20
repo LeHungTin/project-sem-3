@@ -2886,7 +2886,6 @@
     <Content Include="Areas\Admin\Content\plugins\summernote\summernote-lite.js.map" />
     <Content Include="Areas\Admin\Content\plugins\summernote\summernote.js.map" />
     <Content Include="Areas\Admin\Content\plugins\toastr\toastr.js.map" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
@@ -3044,6 +3043,9 @@
     <Content Include="Areas\Admin\Content\bootstrap\package.json" />
     <Content Include="Areas\Admin\Content\bootstrap\README.md" />
     <Content Include="Areas\Admin\Views\Report\_ReportAuction.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\_ChartProduct.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -44,10 +44,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.UpdateBy)
                     </th>
-                    
-                    <th>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </th>
                     <th>Action</th>
                 </tr>
 
@@ -65,18 +61,6 @@
                             @Html.DisplayFor(modelItem => item.UpdateBy)
                         </td>
                         
-                        @if (item.Status == true)
-                        {
-                            <td>
-                                Active &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                Block &nbsp<i style="color : red" class="fa fa-times"></i>
-                            </td>
-                        }
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) &nbsp
                             @Html.ActionLink("Detail", "Detail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp

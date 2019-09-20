@@ -63,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportModel\FilterDateModel.cs" />
     <Compile Include="ReportModel\OrderReport.cs" />
+    <Compile Include="ReportModel\ProductChartModel.cs" />
     <Compile Include="RevenueModel\RevenueModel.cs" />
     <Compile Include="SeachProduct\SeachProduct.cs" />
     <Compile Include="TypeAttributeModel\TypeAttributeModel.cs" />

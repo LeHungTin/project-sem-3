@@ -84,8 +84,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(_category.GetAll(), "Id", "Name");
-            ViewBag.TypeAttribute = _typeAttribute.GetAll().AsQueryable().Include(x => x.Attributes).Where(x => x.Status == true).AsEnumerable();
+            ViewBag.CategoryId = new SelectList(_category.GetAll().Where(x => x.Status == true), "Id", "Name");
+            ViewBag.TypeAttribute = _typeAttribute.GetAll().AsQueryable().Include(x => x.Attributes).AsEnumerable();
             return View();
         }
 

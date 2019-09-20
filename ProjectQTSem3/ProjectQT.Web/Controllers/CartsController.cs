@@ -98,6 +98,7 @@ namespace ProjectQT.Web.Controllers
             }
             // Lưu trữ list trong Session
             Session["cart"] = lst;
+
             return RedirectToAction("Index");
         }
 
@@ -158,6 +159,12 @@ namespace ProjectQT.Web.Controllers
             }
             Session.Remove("cart");
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Delete()
+        {
+            Session.Remove("cart");
+            return RedirectToAction("Index");
         }
     }
 }
