@@ -15,6 +15,10 @@
         {
             <p class="alert alert-danger">@ViewBag.err</p>
         }
+        @if (ViewBag.err1 != null)
+        {
+            <p class="alert alert-danger">@ViewBag.err1</p>
+        }
             <div class="form-group">
                 <label>Email</label>
                 <input class="form-control" data-val="true" data-val-required="The Email field is required." id="Email" name="Email" type="text" value="">

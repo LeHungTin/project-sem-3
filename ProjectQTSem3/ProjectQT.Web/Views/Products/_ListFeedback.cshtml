@@ -1,0 +1,98 @@
+﻿
+@using ProjectQT.DataModel.Models
+@{
+    List<Feedback> listFeedback = ViewBag.listFeedback as List<Feedback>;
+}
+@if (listFeedback == null)
+{
+    <span>The product has no reviews</span>
+}
+else
+{
+    foreach (var item in listFeedback)
+    {
+        <div class="bootstrap-tab-text-grid">
+            <div class="bootstrap-tab-text-grid-left">
+                <img src="~/Content/images/avatar.png" alt=" " class="img-fluid">
+            </div>
+
+            <div class="bootstrap-tab-text-grid-right">
+                <ul>
+                    <li><a href="#">@item.Users.Email</a></li>
+                    <li style="color:#109e22">
+                        @if (item.existOrder == true)
+                        {
+                            <i class="fa fa-check-circle"> Đã mua sản phẩm</i>
+                        }
+                    </li>
+                </ul>
+                <div class="rating1">
+                    @if (item.FeedbackStar <= 1)
+                    {
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    }
+                    else if (item.FeedbackStar <= 2)
+                    {
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                    }
+                    else if (item.FeedbackStar <= 3)
+                    {
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                    }
+                    else if (item.FeedbackStar <= 4)
+                    {
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    }
+                    else if (item.FeedbackStar <= 5)
+                    {
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                        <span style="color:orange" class="fa fa-star"></span>
+                    }
+                    else
+                    {
+                        <a href="#">
+                            There are no reviews yet
+                        </a>
+                    }
+                </div>
+                <p><b>@item.Title</b></p>
+                <p>
+                    @item.Content
+                </p>
+                <div style="display:none" id="myDIV">
+                    <br />
+                    <h4>Content Reply</h4>
+                    <form action="CreateFeedback" method="post">
+                        <textarea style="width:100%" name="Message" required=""></textarea>
+                        <input style="float:right" class="btn btn-success" type="submit" value="SEND">
+                    </form>
+                </div>
+            </div>
+
+            <div class="clearfix"> </div>
+        </div>
+
+    }
+
+}

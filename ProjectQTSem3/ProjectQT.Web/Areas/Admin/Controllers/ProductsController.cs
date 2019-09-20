@@ -85,7 +85,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(_category.GetAll(), "Id", "Name");
-            ViewBag.TypeAttribute = _typeAttribute.GetAll().AsQueryable().Include(x => x.Attributes).AsEnumerable();
+            ViewBag.TypeAttribute = _typeAttribute.GetAll().AsQueryable().Include(x => x.Attributes).Where(x => x.Status == true).AsEnumerable();
             return View();
         }
 
@@ -177,6 +177,9 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                 product.UpdateAt = DateTime.Now;
                 product.UpdateBy = user.Email;
                 product.CreateBy = user.Id;
+                product.Reate = 5;
+                product.CountBuy = 0;
+                product.CountView = 0;
                 if (_product.Update(product))
                 {
                     TempData["UpdateSuccess"] = "Update Success";

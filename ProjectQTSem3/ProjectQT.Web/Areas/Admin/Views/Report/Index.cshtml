@@ -2,7 +2,31 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var xLabels = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.xLabels);
+    var yValues = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.yValues);
+    var y2Values = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.y2Values);
 }
+
+<div class="col-12 no-print">
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Statistical chart
+            </h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="chart">
+                <canvas id="chart" style="height:500px"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-12 no-print">
@@ -17,15 +41,23 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+                <form >
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label>Product Name</label>
                             <input type="text" id="nameProductFilter" class="form-control">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label>Date</label>
-                            <input type="text" id="dateFilter" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#dateFilter">
+                            <input type="text" class="form-control" id="dateFilter" onclick="clearInputMonthYear()">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Month</label>
+                            <input onclick="clearInputDayYear()" type="text" id="monthFilter" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#monthFilter">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Year</label>
+                            <input onclick="clearInputDayMonth()" type="text" id="yearFilter" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#yearFilter">
                         </div>
                     </div>
                     <div class="form-row">
@@ -35,128 +67,9 @@
                     </div>
                 </form>
             </div>
-            <!-- /.card-body -->
         </div>
     </div>
 </div>
-@*
-    <body>
-        <div class="col-12 no-print">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Revenue statistics chart
-                    </h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <canvas id="chart" style="height:500px"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="loadReport" class="col-12">
-            <div class="card card-info">
-                <div class="card-header no-print">
-                    <h3 class="card-title">Revuene Report</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="invoice p-3 mb-3">
-                        <!-- title row -->
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>
-                                    <i class="fas fa-globe"></i> Auction
-                                    <small class="float-right">Date: @DateTime.Now.ToString("dd-MM-yyyy")</small>
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5 invoice-col">
-                                <address>
-                                    Cau Giay, Ha Noi<br>
-                                </address>
-                            </div>
-                            <div class="col-sm-4 invoice-col">
-                            </div>
-                            <div class="col-sm-4 invoice-col">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <h3>
-                                    Revuene Report
-                                </h3>
-                                <br />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Product name</th>
-                                            <th>OrderBy</th>
-                                            <th>Quantity</th>
-                                            <th>CreateAt</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>@item.ProductId</td>
-                                                <td>@item.CreateBy</td>
-                                                <td>@item.Quantity</td>
-                                                <td>@item.CreateAt</td>
-                                                <td>$@item.Price</td>
-                                            </tr>
-                                        }
-                                        <tr>
-                                            <td colspan="3"></td>
-                                            <td> <b>Total Price:</b> </td>
-                                            <td> <b> <i>$@Model.Sum(i => i.Price) </i></b> </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-8">
-                            </div>
-                            <div class="col-4  text-center">
-                                <i>Ha noi, date @DateTime.Now.Day, month @DateTime.Now.Month, year @DateTime.Now.Year </i>
-                                <div>
-                                    <h5><b>Prepared By</b></h5>
-                                    <i> (Sign)</i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row no-print">
-                            <div class="col-12">
-                                <button onclick="printDiv('loadReport')" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-*@
 
 <body>
     <div id="loadReport" class="row">
@@ -165,18 +78,56 @@
 
 <!-- /.content -->
 <script>
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-        window.print();
-
-        document.body.innerHTML = originalContents;
+        function clearInputMonthYear() {
+            document.getElementById('monthFilter').value = '';
+        document.getElementById('yearFilter').value = '';
     }
+    function clearInputDayYear() {
+            document.getElementById('dateFilter').value = '';
+        document.getElementById('yearFilter').value = '';
+    }
+    function clearInputDayMonth() {
+            document.getElementById('monthFilter').value = '';
+        document.getElementById('dateFilter').value = '';
+    }
+    function printReport() {
+            window.print();
+        }
 </script>
 @section scripts
 {
+    <script>
+        $(function () {
+
+            //Date range picker
+            $('#dateFilter').daterangepicker(
+                {
+                    autoUpdateInput: false,
+                    singleDatePicker: true,
+                    locale: 'vi'
+                }, function (chosenDate) {
+                    $('#dateFilter').val(chosenDate.format('DD/MM/YYYY'));
+                });
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#monthFilter').datetimepicker({
+                viewMode: 'years',
+                format: 'MM/YYYY',
+                locale: 'vi'
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#yearFilter').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY',
+                locale: 'vi'
+            });
+        });
+    </script>
     <script>
 
         $(function () {
@@ -186,26 +137,99 @@
             function (e) {
                 var dateModel = {
                     nameProduct: $('#nameProductFilter').val(),
-                    endDate: $('#dateFilter').val()
+                    endDate: $('#dateFilter').val(),
+                    monthDate: $('#monthFilter').val(),
+                    yearDate: $('#yearFilter').val()
                 };
                 GetReport(dateModel);
             });
+
         function GetReport(dateModel) {
             $.ajax({
-                    url: '/Admin/Report/FilterReport',
-                    type: 'POST',
-                    cache: false,
-                    async: true,
-                    dataType: "html",
-                    data: dateModel
-                })
-                .done(function(result) {
+                url: '/Admin/Report/FilterReport',
+                type: 'POST',
+                cache: false,
+                async: true,
+                dataType: "html",
+                data: dateModel
+            })
+                .done(function (result) {
                     $('#loadReport').html(result);
-                }).fail(function(xhr) {
+                }).fail(function (xhr) {
                     console.log('error : ' + xhr.status + ' - ' + xhr.statusText + ' - ' + xhr.responseText);
                 });
         }
     </script>
-    
+
+    <script type="text/javascript">
+        $(function () {
+    var chartName = "chart";
+        var ctx = document.getElementById(chartName).getContext('2d');
+        var data = {
+                labels: @Html.Raw(xLabels),
+                datasets: [
+                  {
+                    label               : 'Buys',
+                    backgroundColor     : 'rgba(60,141,188,0.9)',
+                    borderColor         : 'rgba(60,141,188,0.8)',
+                    pointRadius          : false,
+                    pointColor          : '#3b8bba',
+                    pointStrokeColor    : 'rgba(60,141,188,1)',
+                    pointHighlightFill  : '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data                : @Html.Raw(yValues),
+                  },
+                  {
+                    label               : 'Views',
+                    backgroundColor     : 'rgba(210, 214, 222, 1)',
+                    borderColor         : 'rgba(210, 214, 222, 1)',
+                    pointRadius         : false,
+                    pointColor          : 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor    : '#c1c7d1',
+                    pointHighlightFill  : '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data                : @Html.Raw(y2Values),
+                  }
+                ]
+            };
+
+var options = {
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true,
+
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "rgba(255,99,164,0.2)"
+                        }
+}],
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+
+                },
+                tooltips: {
+
+                }
+
+            };
+           var myChart = new  Chart(ctx, {
+                    options: options,
+                    data: data,
+                    type:'bar'
+                });
+            });
+    </script>
+
 }
 

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ProjectQT.ViewModel.OrderModel.GetAllOrderModel>
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        @if (TempData["CreateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["CreateSuccess"]</h3>
+        }
+        @if (TempData["UpdateSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["UpdateSuccess"]</h3>
+        }
+        @if (TempData["UpdateFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["UpdateFalse"] </h3>
+        }
+        @if (TempData["DeleteSuccess"] != null)
+        {
+            <h3 class="alert alert-success lisproduct-alert">@TempData["DeleteSuccess"]</h3>
+        }
+        @if (TempData["DeleteFalse"] != null)
+        {
+            <h3 class="alert alert-danger lisproduct-alert">@TempData["DeleteFalse"] </h3>
+        }
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+            <table class="table">
+                <tr>
+                    <th>
+                        OrderBy
+                    </th>
+                    <th>
+                        Handeler
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateAt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </td>
+                        <td>
+                            @if (item.HandelerId == null)
+                            {
+                                <p>Please wait a minute...</p>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.HandelerId)
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateAt)
+                        </td>
+                        @if (item.Status == true)
+                        {
+                            <td>
+                                Approved &nbsp<i style="color : green" class=" fa fa-check-circle"></i>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Approve &nbsp<i style="color : red" class="fa fa-times"></i>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Detail", "OrderDetail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+

@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/daterangepicker/daterangepicker.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -280,7 +289,7 @@
         </div>
         <!-- /.content-wrapper -->
 
-        <footer class="main-footer">
+        <footer  class="main-footer no-print">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.0.0-beta.1
             </div>
@@ -297,6 +306,7 @@
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/Areas/Admin/Content/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Areas/Admin/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
@@ -307,12 +317,13 @@
     <script src="~/Areas/Admin/Content/dist/js/demo.js"></script>
     <script src="~/Areas/Admin/Content/plugins/chart.js/Chart.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Thư viện popper đã nén phục vụ cho bootstrap.min.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <!-- Bản js đã nén của bootstrap 4, đặt dưới cùng trước thẻ đóng body-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
+    <script src="~/Areas/Admin/Content/plugins/moment/moment.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/Areas/Admin/Content/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="~/Areas/Admin/Content/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>

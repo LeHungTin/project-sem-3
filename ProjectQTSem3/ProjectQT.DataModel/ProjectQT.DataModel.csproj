@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectQT.DataModel</RootNamespace>
     <AssemblyName>ProjectQT.DataModel</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,6 +67,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductAttribute.cs" />
+    <Compile Include="Models\ProductDetailOrder.cs" />
     <Compile Include="Models\QTShopDbContext.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\TypeAttribute.cs" />

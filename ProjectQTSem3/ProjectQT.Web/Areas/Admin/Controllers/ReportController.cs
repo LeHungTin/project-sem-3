@@ -4,6 +4,7 @@ using ProjectQT.ViewModel.DashboardModels;
 using ProjectQT.ViewModel.ReportModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,34 +51,47 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
             {
                 listOrderDetail = listOrderDetail.Where(s => s.ProductId.ToLower().Contains(dateModel.NameProduct.ToLower()));
             }
-            var date = Convert.ToDateTime(dateModel.EndDate);
-            if (date != DateTime.MinValue)
+            if (string.IsNullOrEmpty(dateModel.NameProduct) && string.IsNullOrEmpty(dateModel.EndDate) 
+                && string.IsNullOrEmpty(dateModel.MonthDate) && string.IsNullOrEmpty(dateModel.YearDate))
             {
-                listOrderDetail = listOrderDetail.Where(d => d.CreateAt.Date == date);
+                listOrderDetail = listOrderDetail.Take(10);
             }
-            return listOrderDetail;
+
+            if (!string.IsNullOrEmpty(dateModel.EndDate))
+            {
+                var date = DateTime.ParseExact(dateModel.EndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                listOrderDetail = listOrderDetail.Where(d => d.CreateAt.Date == date);
+                var count = listOrderDetail.Count();
+            }
+            if (!string.IsNullOrEmpty(dateModel.MonthDate))
+            {
+                var monthDate = Convert.ToDateTime(dateModel.MonthDate);
+                listOrderDetail = listOrderDetail.Where(d => d.CreateAt.Month == monthDate.Month && d.CreateAt.Year == monthDate.Year);
+                var count = listOrderDetail.Count();
+            }
+            if (!string.IsNullOrEmpty(dateModel.YearDate))
+            {
+                var yearDate = DateTime.ParseExact(dateModel.YearDate, "yyyy", CultureInfo.InvariantCulture);
+                listOrderDetail = listOrderDetail.Where(d => d.CreateAt.Year == yearDate.Year);
+                var count = listOrderDetail.Count();
+            }
+            return listOrderDetail.OrderByDescending(x => x.CreateAt);
         }
 
         // GET: Admin/Report
-        public ActionResult Index(FilterDateModel dateModel)
+        public ActionResult Index()
         {
-            //var product = _product.GetAll();
-            //var orderReport = GetOrderReports(dateModel).ToList();
-            //ViewBag.xLabels = product.Select(x => x.Name).ToList();
-            //ViewBag.yValues = GetOrderReports(dateModel).Select(x => x.CountBuy).ToList(); 
-            //ViewBag.y2Values = GetOrderReports(dateModel).Select(x => x.CountView).ToList();
-            //return View(orderReport);
+            var product = _product.GetAll();
+            ViewBag.xLabels = product.Select(x => x.Name).ToList();
+            ViewBag.yValues = product.Select(x => x.CountBuy).ToList();
+            ViewBag.y2Values = product.Select(x => x.CountView).ToList();
             return View();
         }
 
         [HttpPost]
         public ActionResult FilterReport(FilterDateModel dateModel)
         {
-            var product = _product.GetAll();
             var orderReport = GetOrderReports(dateModel).ToList();
-            ViewBag.xLabels = product.Select(x => x.Name).ToList();
-            ViewBag.yValues = GetOrderReports(dateModel).Select(x => x.CountBuy).ToList();
-            ViewBag.y2Values = GetOrderReports(dateModel).Select(x => x.CountView).ToList();
             return PartialView("_ReportAuction", orderReport);
         }
     }

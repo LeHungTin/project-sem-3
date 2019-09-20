@@ -10,7 +10,7 @@ namespace ProjectQT.ViewModel.OrderModel
     {
         public int Id { set; get; }
         public DateTime CreateAt { set; get; }
-        public string CreateBy { set; get; }
+        public int CreateBy { set; get; }
         public bool Status { set; get; }
         public string UserId { get; set; }
         public string HandelerId { get; set; }

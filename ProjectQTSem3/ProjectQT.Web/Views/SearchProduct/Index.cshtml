@@ -1,0 +1,339 @@
+﻿@model List<ProjectQT.ViewModel.SeachProduct.SeachProduct>
+@using ProjectQT.DataModel.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Product> product = ViewBag.ListProduct as List<Product>;
+}
+
+<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+    <div class="container-fluid">
+        <div class="inner-sec-shop px-lg-4 px-3">
+            <h3 class="tittle-w3layouts my-lg-4 mt-3">New Arrivals for you </h3>
+            <div class="row">
+                <!-- product left -->
+                <div class="side-bar col-lg-3">
+                    <form action="#" method="post">
+                        <div class="search-hotel">
+                            <h3 class="agileits-sear-head">Search Here..</h3>
+                            <input id="productNameFilter" class="form-control" type="search" name="search" placeholder="Search here..." required="">
+                            <div class="clearfix"> </div>
+                        </div>
+                        <!-- price range -->
+                        <div class="range" style="height:120px">
+                            <h3 class="agileits-sear-head">Price range</h3>
+                            <ul class="dropdown-menu6">
+                                <li>
+                                    <input id="startPriceFilter" placeholder="Start Price..." style="width:45%; float:left" type="number" class="form-control" />
+                                    <input id="endPriceFilter" placeholder="End Price..." style="width:45%; float:right" type="number" class="form-control" />
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //price range -->
+                        <!-- reviews -->
+                        <div class="customer-rev left-side">
+                            <h3 class="agileits-sear-head">Customer Review</h3>
+                            <ul>
+                                <li>
+                                    <input id="reate5Filter" type="checkbox" value="FALSE" name="group1[]" />
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span>5.0</span>
+                                </li>
+                                <li>
+                                    <input id="reate4Filter" type="checkbox" value="FALSE" name="group1[]" />
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span>4.0</span>
+                                </li>
+                                <li>
+                                    <input id="reate3Filter" type="checkbox" value="FALSE" name="group1[]" />
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span>3.0</span>
+                                </li>
+                                <li>
+                                    <input id="reate2Filter" type="checkbox" value="FALSE" name="group1[]" />
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span>2.0</span>
+                                </li>
+                                <li>
+                                    <input id="reate1Filter" type="checkbox" value="FALSE" name="group1[]" />
+                                    <span style="color:orange" class="fa fa-star"></span>
+                                    <span>1.0</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <br />
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <input id="btnSearch" type="button" class="btn btn-primary" value="Seach" />
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div id="loadReport" class="left-ads-display col-lg-9">
+
+                    <!--/Load Data Product-->
+
+                </div>
+            </div>
+            <!--/slide-->
+            <div class="slider-img mid-sec mt-lg-5 mt-2">
+                <!--//banner-sec-->
+                <h3 class="tittle-w3layouts text-left my-lg-4 my-3">Featured Products</h3>
+                <div class="mid-slider">
+                    <div class="owl-carousel owl-theme row">
+                        @foreach (var pro in ViewBag.ListProduct)
+                        {
+                            <div class="item">
+                                <div class="gd-box-info text-center">
+                                    <div class="product-men women_two bot-gd">
+
+                                        <div class="product-googles-info slide-img googles">
+                                            <div class="men-pro-item">
+                                                <div class="men-thumb-item">
+                                                    <img src="@pro.ImageUrl" style="width: 80%; height: 80%;">
+                                                    <div class="men-cart-pro">
+                                                        <div class="inner-men-cart-pro">
+                                                            <a href="/Products/Detail/@pro.Id" class="link-product-add-cart">Quick View</a>
+                                                        </div>
+                                                    </div>
+                                                    <span class="product-new-top">New</span>
+                                                </div>
+                                                <div class="item-info-product">
+
+                                                    <div class="info-product-price">
+                                                        <div class="grid_meta">
+                                                            <div class="product_price">
+                                                                <h4>
+                                                                    <a href="single.html">@pro.Name </a>
+                                                                </h4>
+                                                                <div class="grid-price mt-2">
+                                                                    @if (pro.SalePrice == null || pro.SalePrice == 0)
+                                                                    {
+                                                                        <span class="money ">$@pro.Price</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <strike class="money ">$@pro.Price</strike>
+                                                                        <span class="money "><b style="color: red">$@pro.SalePrice</b></span>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="rating1">
+                                                                @if (pro.Reate <= 1)
+                                                                {
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                }
+                                                                else if (pro.Reate <= 2)
+                                                                {
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                }
+                                                                else if (pro.Reate <= 3)
+                                                                {
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                }
+                                                                else if (pro.Reate <= 4)
+                                                                {
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                }
+                                                                else if (pro.Reate <= 5)
+                                                                {
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                    <span style="color:orange" class="fa fa-star"></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="#">
+                                                                        There are no reviews yet
+                                                                    </a>
+                                                                }
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="googles single-item hvr-outline-out">
+                                                            <form action="#" method="post">
+                                                                <input type="hidden" name="cmd" value="_cart">
+                                                                <input type="hidden" name="add" value="1">
+                                                                <input type="hidden" name="googles_item" value="Fastrack Aviator">
+                                                                <input type="hidden" name="amount" value="325.00">
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--//slider-->
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $('input[type="checkbox"]').on('change', function () {
+            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+        });
+
+        $('#reate1Filter').on('click', function () {
+            var valueInp = document.getElementById('reate1Filter').value;
+            if (valueInp == 'TRUE') {
+                $('#reate1Filter').val('FALSE')
+            } else {
+                $('#reate1Filter').val('TRUE')
+                $('#reate2Filter').val('FALSE')
+                $('#reate3Filter').val('FALSE')
+                $('#reate4Filter').val('FALSE')
+                $('#reate5Filter').val('FALSE')
+            }
+
+        })
+
+        $('#reate2Filter').on('click', function () {
+            var valueInp = document.getElementById('reate2Filter').value;
+            if (valueInp == 'TRUE') {
+                $('#reate2Filter').val('FALSE')
+            } else {
+                $('#reate2Filter').val('TRUE')
+                $('#reate1Filter').val('FALSE')
+                $('#reate3Filter').val('FALSE')
+                $('#reate4Filter').val('FALSE')
+                $('#reate5Filter').val('FALSE')
+            }
+
+        })
+        $('#reate3Filter').on('click', function () {
+            var valueInp = document.getElementById('reate3Filter').value;
+            if (valueInp == 'TRUE') {
+                $('#reate3Filter').val('FALSE')
+            } else {
+                $('#reate3Filter').val('TRUE')
+                $('#reate1Filter').val('FALSE')
+                $('#reate2Filter').val('FALSE')
+                $('#reate4Filter').val('FALSE')
+                $('#reate5Filter').val('FALSE')
+            }
+
+
+        })
+        $('#reate4Filter').on('click', function () {
+            var valueInp = document.getElementById('reate4Filter').value;
+            if (valueInp == 'TRUE') {
+                $('#reate4Filter').val('FALSE')
+            } else {
+                $('#reate4Filter').val('TRUE')
+                $('#reate1Filter').val('FALSE')
+                $('#reate3Filter').val('FALSE')
+                $('#reate2Filter').val('FALSE')
+                $('#reate5Filter').val('FALSE')
+            }
+
+
+        })
+        $('#reate5Filter').on('click', function () {
+            var valueInp = document.getElementById('reate5Filter').value;
+            if (valueInp == 'TRUE') {
+                $('#reate5Filter').val('FALSE')
+            } else {
+                $('#reate5Filter').val('TRUE')
+                $('#reate1Filter').val('FALSE')
+                $('#reate3Filter').val('FALSE')
+                $('#reate4Filter').val('FALSE')
+                $('#reate2Filter').val('FALSE')
+            }
+
+
+        })
+
+    </script>
+
+    <script>
+
+        $(function () {
+            GetReport();
+        });
+
+
+        $('#btnSearch').on('click',
+            function (e) {
+                var startPrice = document.getElementById("startPriceFilter").value;
+                var endPrice = document.getElementById("endPriceFilter").value;
+
+                var lastStartPrice = parseInt(startPrice);
+                var lastEndPrice = parseInt(endPrice);
+                if (lastEndPrice < lastStartPrice) {
+
+                    alert('The end price must be greater than the start price');
+                    event.preventDefault();
+                } else {
+                    var dateModel = {
+                        productName: $('#productNameFilter').val(),
+                        startPrice: $('#startPriceFilter').val(),
+                        endPrice: $('#endPriceFilter').val(),
+                        reate1: $('#reate1Filter').val(),
+                        reate2: $('#reate2Filter').val(),
+                        reate3: $('#reate3Filter').val(),
+                        reate4: $('#reate4Filter').val(),
+                        reate5: $('#reate5Filter').val(),
+                    };
+                    GetReport(dateModel);
+                }
+            });
+
+        function GetReport(dateModel) {
+            $.ajax({
+                url: '/SearchProduct/FilterProduct',
+                type: 'POST',
+                cache: false,
+                async: true,
+                dataType: "html",
+                data: dateModel
+            })
+                .done(function (result) {
+                    $('#loadReport').html(result);
+                }).fail(function (xhr) {
+                    console.log('error : ' + xhr.status + ' - ' + xhr.statusText + ' - ' + xhr.responseText);
+                });
+        }
+    </script>
+}

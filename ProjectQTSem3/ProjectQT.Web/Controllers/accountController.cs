@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using ProjectQT.Web.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ProjectQT.Web.Controllers
 {
@@ -19,6 +21,18 @@ namespace ProjectQT.Web.Controllers
             _groupRole = new GenericRepository<GroupRole>();
         }
 
+        public static string MD5Hash(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
         /// <summary>
         /// Action Login Method GET
         /// </summary>
@@ -38,7 +52,18 @@ namespace ProjectQT.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-            var user =_repositoryUser.GetAll().FirstOrDefault(x => x.Email == loginViewModel.Email && x.Password == loginViewModel.Password);
+            var hassPass = MD5Hash(loginViewModel.Password);
+            var user = _repositoryUser.GetAll().FirstOrDefault(x => x.Email == loginViewModel.Email && x.Password == hassPass);
+            if (user == null)
+            {
+                ViewBag.err = "Wrong account or password!";
+                return View();
+            }
+            if (user.Status == false)
+            {
+                ViewBag.err1 = "Your account has been locked";
+                return View();
+            }
             if (user != null)
             {
                 var id = user.Id;
@@ -67,6 +92,7 @@ namespace ProjectQT.Web.Controllers
             return View();
         }
 
+
         /// <summary>
         /// Action Register Method POST
         /// </summary>
@@ -78,7 +104,8 @@ namespace ProjectQT.Web.Controllers
             {
                 User user = new User();
                 user.Email = registerViewModel.Email;
-                user.Password = registerViewModel.Password;
+                var md5data = MD5Hash(registerViewModel.Password);
+                user.Password = md5data;
                 user.FullName = registerViewModel.FullName;
                 user.BirthDay = registerViewModel.BirthDay;
                 user.PhoneNumber = registerViewModel.PhoneNumber;
