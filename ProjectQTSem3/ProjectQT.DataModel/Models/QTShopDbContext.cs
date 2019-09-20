@@ -22,6 +22,7 @@ namespace ProjectQT.DataModel.Models
         public virtual DbSet<GroupRole> GroupRoles { get; set; }
         public virtual DbSet<TypeAttribute> TypeAttributes { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
+        public virtual DbSet<ProductDetailOrder> ProductDetailOrders { get; set; }
 
     }
 }

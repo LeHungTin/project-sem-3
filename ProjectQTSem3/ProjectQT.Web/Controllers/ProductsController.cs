@@ -61,9 +61,7 @@ namespace ProjectQT.Web.Controllers
                                 Attributes = x.Attributes
                             }).ToList();
                 ViewBag.types = data;
-                ViewBag.Product = product;
                 var listFeedback = _feeback.GetAll().AsQueryable().Include(x => x.Users).Where(x => x.ProductId == product.Id).ToList();
-                var c = listFeedback.Count();
                 var orderDetail = _orderDetail.GetAll();
                 foreach (var item in listFeedback)
                 {
@@ -74,7 +72,8 @@ namespace ProjectQT.Web.Controllers
                     }
                 }
                 ViewBag.listFeedback = listFeedback;
-                return View();
+                ViewBag.countFeedback = listFeedback.Count();
+                return View(product);
             }
             return RedirectToAction("Index", "Home");
         }
@@ -108,6 +107,7 @@ namespace ProjectQT.Web.Controllers
             _Product.Update(product);
 
             return RedirectToAction("Index", "Home");
+
         }
     }
 }

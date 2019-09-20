@@ -1,7 +1,6 @@
-﻿@model IEnumerable<ProjectQT.DataModel.Models.Order>
-
+﻿@model IEnumerable<ProjectQT.ViewModel.OrderModel.GetAllOrderModel>
 @{
-    ViewBag.Title = "OrderHistory";
+    ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -48,7 +47,6 @@
                     </th>
                     <th>Action</th>
                 </tr>
-
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -56,7 +54,14 @@
                             @Html.DisplayFor(modelItem => item.UserId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.HandelerId)
+                            @if (item.HandelerId == null)
+                            {
+                                <p>Please wait a minute...</p>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.HandelerId)
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreateAt)
@@ -70,11 +75,11 @@
                         else
                         {
                             <td>
-                                not approved &nbsp<i style="color : red" class="fa fa-times"></i>
+                                Approve &nbsp<i style="color : red" class="fa fa-times"></i>
                             </td>
                         }
                         <td>
-                            @Html.ActionLink("Detail", "User", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
+                            @Html.ActionLink("Detail", "OrderDetail", new { id = item.Id }, new { @class = "btn btn-info" }) &nbsp
                         </td>
                     </tr>
                 }
@@ -84,3 +89,4 @@
     </div>
     <!-- /.card -->
 </div>
+

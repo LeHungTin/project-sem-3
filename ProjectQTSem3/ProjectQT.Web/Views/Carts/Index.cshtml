@@ -1,9 +1,7 @@
-﻿@using ProjectQT.ViewModel.CartModel
-@model ProjectQT.DataModel.Models.OrderDetail
+﻿@model List<ProjectQT.ViewModel.CartModel.CartModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<CartModel> ListCartModel = ViewBag.lisCart as List<CartModel>;
 }
 
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
@@ -14,7 +12,7 @@
             <div class="row">
                 <h4>
                     Your shopping cart contains:
-                    <span>@ListCartModel.Count() Products</span>
+                    <span>@Model.Count() Products</span>
                 </h4>
                 <table class="table">
                     <thead class="thead-dark">
@@ -28,10 +26,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (ListCartModel.Count() > 0)
+                        @if (Model.Count() > 0)
                         {
                             var slNO = 0;
-                            foreach (var item in ListCartModel)
+                            foreach (var item in Model)
                             {
                                 slNO += 1;
                                 <tr class="rem1">
@@ -50,7 +48,19 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="invert">@item.Products.Name </td>
+                                    <td class="invert">
+                                        <a>@item.Products.Name </a>
+                                        @{
+                                            var _attrs = item.Attrs.Split(',');
+                                        }
+                                        @foreach (var attr in ViewBag.attrs)
+                                        {
+                                            if (_attrs.Any(x => Convert.ToInt32(x) == attr.Id))
+                                            {
+                                                <h5>@attr.Name</h5>
+                                            }
+                                        }
+                                    </td>
 
                                     <td class="invert">$@item.Products.Price</td>
                                     <td class="invert">
@@ -79,7 +89,7 @@
                         @{
                             var sl = 0;
                             decimal totalMoney = 0;
-                            foreach (var item in ListCartModel)
+                            foreach (var item in Model)
                             {
                                 var total = item.Products.Price * item.Quantity;
                                 totalMoney += total;
@@ -101,10 +111,13 @@
                             </tr>
                         }
                     </table>
-                    @using (Html.BeginForm("AddToCart", "Carts", FormMethod.Post))
+                    @if (Model.Count() == 0)
                     {
-                        @Html.HiddenFor(model => model.ProductId)
-                        <input class="btn btn-success" type="submit" value="Make a Payment" />
+                        <a class="btn btn-primary" href="/Home/Index">Back To Home</a>
+                    }
+                    else
+                    {
+                        <input id="btnSubmit" class="btn btn-success" type="submit" value="Make a Payment" />
                     }
                 </div>
                 <div class="clearfix"> </div>
@@ -113,4 +126,29 @@
     </div>
 </section>
 
+@section scripts
+{
+    <script>
 
+        $('#btnSubmit').on('click',
+            function (e) {
+                var dateModel = {
+                    ProductId: $('#productId').val(),
+                };
+                SubmitFeedback(dateModel);
+            });
+
+        function SubmitFeedback(dateModel) {
+            $.ajax({
+                url: '/Carts/CreateOrder',
+                type: 'POST',
+                cache: false,
+                async: true,
+                dataType: "json",
+                data: dateModel
+            });
+            location.reload();
+        }
+    </script>
+
+}

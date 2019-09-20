@@ -2,7 +2,8 @@
 @using ProjectQT.ViewModel.OrderModel
 @{
     ViewBag.Title = "OrderDetail";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
     decimal totalMoney = 0;
     IEnumerable<OrderDetailModel> listOrderDetail = ViewBag.OrderDetail as IEnumerable<OrderDetailModel>;
 }
@@ -67,10 +68,5 @@
             </td>
         </tr>
     </table>
-    @using (Html.BeginForm("Approve", "Order", FormMethod.Post))
-    {
-        @Html.HiddenFor(model => model.Id)
-        <input class="btn btn-success" type="submit" value="Aprove" />
-        <input class="btn btn-danger" type="submit" value="Reject" />
-    }
 </div>
+
