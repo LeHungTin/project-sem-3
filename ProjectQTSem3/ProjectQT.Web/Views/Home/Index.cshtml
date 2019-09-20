@@ -1,15 +1,17 @@
-﻿@model IEnumerable<ProjectQT.DataModel.Models.Product>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ProjectQT.DataModel.Models.Product>
 @{
     ViewBag.Title = "Home Page";
 }
 
 @Html.Partial("banner")
 
+<!-- Latest compiled and minified JavaScript -->
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
     <div class="container-fluid">
         <div class="inner-sec-shop px-lg-4 px-3">
             <h3 class="tittle-w3layouts my-lg-4 my-4">Best seller for you </h3>
-            
             <div class="owl-carousel owl-theme row owl-loaded owl-drag">
                 <div class="owl-stage-outer">
                     <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1865px;">
@@ -289,6 +291,9 @@
 
                 }
             </div>
+            <div>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+            </div>
             <!--/meddle-->
             <div class="row">
                 <div class="col-md-12 middle-slider my-4">
@@ -464,7 +469,6 @@
         </div>
     </div>
 </section>
-
 
 
 

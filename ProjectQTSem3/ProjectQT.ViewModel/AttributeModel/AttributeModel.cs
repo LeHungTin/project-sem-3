@@ -13,6 +13,7 @@ namespace ProjectQT.ViewModel.AttributeModel
         public string Name { get; set; }
         [Required]
         public int TypeId { get; set; }
+        [Required]
         public string TypeName { get; set; }
         public DateTime UpdateAt { get; set; }
         public string UpdateBy { get; set; }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class BusinessController : Controller
     {
         GenericRepository<Business> _business;
@@ -21,6 +21,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         // GET: Admin/Business
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
         public ActionResult Index()
         {
             var business = _business.GetAll();
@@ -28,6 +29,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Business
+        [CustomizeAuth(Roles = "Update")]
         public ActionResult UpdateBusiness()
         {
             Reflection reflection = new Reflection();

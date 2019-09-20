@@ -3,46 +3,33 @@ using ProjectQT.DataModel.Models;
 using ProjectQT.ViewModel.DashboardModels;
 using ProjectQT.ViewModel.OrderModel;
 using ProjectQT.ViewModel.ReportModel;
+using ProjectQT.Web.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class HomeController : Controller
     {
         GenericRepository<RevenueModel> _revenueModel;
         GenericRepository<OrderDetail> _orderDetail;
         GenericRepository<Order> _order;
         GenericRepository<Product> _product;
+        GenericRepository<User> _User;
+
         public HomeController()
         {
             _revenueModel = new GenericRepository<RevenueModel>();
             _orderDetail = new GenericRepository<OrderDetail>();
             _order = new GenericRepository<Order>();
             _product = new GenericRepository<Product>();
+            _User = new GenericRepository<User>();
         }
 
-
-        public IEnumerable<ProductChartModel> GetDataProduct()
-        {
-            var listProductThisWeek = new List<ProductChartModel>();
-            var listProduct = _product.GetAll().OrderByDescending(x => x.CountView).ToList();
-            foreach (var item in listProduct)
-            {
-                var product = new ProductChartModel
-                {
-                    IdProduct = item.Id,
-                    NameProduct = item.Name,
-                    Count = 1
-                };
-            }
-            listProductThisWeek = listProductThisWeek.OrderByDescending(c => c.Count).Take(6).ToList();
-
-            return listProductThisWeek;
-        }
 
         public IEnumerable<RevenueModel> GetRevenue()
         {
@@ -80,6 +67,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
         public ActionResult Index()
         {
             var listOrderDetail = GetRevenue();
@@ -88,18 +76,12 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
 
             var listData = listOrderDetail.Select(item => item.Money).ToArray();
             ViewBag.ListData = listData;
+            var product = _product.GetAll();
+            ViewBag.xLabels = product.Select(x => x.Name).ToList();
+            ViewBag.yValues = product.Select(x => x.CountBuy).ToList();
+            ViewBag.y2Values = product.Select(x => x.CountView).ToList();
             return View();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult ProductChart()
-        {
-            var product = GetDataProduct();
-            return PartialView("_ChartProduct", product);
-        }
     }
 }

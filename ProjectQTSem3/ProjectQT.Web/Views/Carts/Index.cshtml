@@ -61,9 +61,14 @@
                                             }
                                         }
                                     </td>
-
-                                    <td class="invert">$@item.Products.Price</td>
-
+                                    @if (item.Products.SalePrice == null)
+                                    {
+                                        <td class="invert">$@item.Products.Price</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="invert">$@item.Products.SalePrice</td>
+                                    }
                                 </tr>
                             }
                         }
@@ -93,21 +98,40 @@
 
                         @{
                             var sl = 0;
-                            decimal totalMoney = 0;
+                            decimal? totalMoney = 0;
                             foreach (var item in Model)
                             {
-                                var total = item.Products.Price * item.Quantity;
-                                totalMoney += total;
-                                sl += 1;
-                                <tr>
-                                    <td>
-                                        Product(@sl)
-                                    </td>
-                                    <td>
-                                        @item.Products.Name
-                                    </td>
-                                    <td>$@total</td>
-                                </tr>
+                                if (item.Products.SalePrice == null)
+                                {
+                                    var total = item.Products.Price * item.Quantity;
+                                    totalMoney += total;
+                                    sl += 1;
+                                    <tr>
+                                        <td>
+                                            Product(@sl)
+                                        </td>
+                                        <td>
+                                            @item.Products.Name
+                                        </td>
+                                        <td>$@total</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    var total = item.Products.SalePrice * item.Quantity;
+                                    totalMoney += total;
+                                    sl += 1;
+                                    <tr>
+                                        <td>
+                                            Product(@sl)
+                                        </td>
+                                        <td>
+                                            @item.Products.Name
+                                        </td>
+                                        <td>$@total</td>
+                                    </tr>
+                                }
+
                             }
                             <tr style="border-top: 1px solid #bbb; margin-bottom: 15px;">
                                 <td>Total</td>

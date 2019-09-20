@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class GroupRolesController : Controller
     {
         GenericRepository<GroupRole> _groupRole;

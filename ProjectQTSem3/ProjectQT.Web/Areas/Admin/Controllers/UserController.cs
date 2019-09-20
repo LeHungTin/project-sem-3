@@ -3,20 +3,17 @@ using ProjectQT.DataModel.Models;
 using ProjectQT.ViewModel.UserModel;
 using ProjectQT.Web.Areas.Admin.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjectQT.Web.Areas.Admin.Controllers
 {
-    //[CustomizeAuth]
+    [CustomizeAuth]
     public class UserController : Controller
     {
         GenericRepository<User> _user;
         GenericRepository<Group> _group;
-
 
         public UserController()
         {
@@ -30,6 +27,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Admin/User
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Index()
         {
             var user = _user.GetAll().AsQueryable().Include(x => x.Groups);
@@ -74,6 +73,8 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomizeAuth(Roles = "Detail")]
+
         public ActionResult Detail(int id)
         {
             var user = _user.GetById(id);
