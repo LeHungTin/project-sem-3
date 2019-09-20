@@ -62,8 +62,24 @@
         color: orange;
     }
 </style>
-<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+<section class="banner-bottom-wthreelayouts">
+    <div class="banner_inner">
+        <div class="services-breadcrumb">
+            <div class="inner_breadcrumb">
+
+                <ul class="short">
+                    <li>
+                        <a href="/">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li>Product detail</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
     <div class="container">
+
         <div class="inner-sec-shop pt-lg-4 pt-3">
             <div class="row">
                 <div class="col-lg-4 single-right-left ">
@@ -148,7 +164,7 @@
                             @foreach (var type in ViewBag.types)
                             {
                                 <h5>@type.TypeName</h5>
-                                <select style="width: 150px;" class="required-entry product-custom-option" id="select_2" name="attributes">
+                                <select style="width: 150px;" class="required-entry product-custom-option form-control" id="select_2" name="attributes">
                                     @foreach (var item in type.Attributes)
                                     {
                                         <option value="@item.Id">@item.Name</option>
@@ -157,9 +173,9 @@
                             }
                             <div class="clearfix"> </div>
                         </div>
-                        <div class="input-content">
+                        <div class="input-content mb-2">
                             <label for="qty">Quantity:</label>
-                            <input type="text" data-type="number" class="input-text qty" value="1" maxlength="3" id="qty" name="qty">
+                            <input type="text" data-type="number" style="width: 150px;" class="input-text qty form-control" value="1" maxlength="3" id="qty" name="qty">
                         </div>
                         if (Session["User"] != null)
                         {
@@ -174,35 +190,7 @@
                             </a>
                         }
                     }
-                    <ul class="footer-social text-left mt-lg-4 mt-3">
-                        <li>Share On : </li>
-                        <li class="mx-2">
-                            <a href="#">
-                                <span class="fab fa-facebook-f"></span>
-                            </a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="#">
-                                <span class="fab fa-twitter"></span>
-                            </a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="#">
-                                <span class="fab fa-google-plus-g"></span>
-                            </a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="#">
-                                <span class="fab fa-linkedin-in"></span>
-                            </a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="#">
-                                <span class="fas fa-rss"></span>
-                            </a>
-                        </li>
 
-                    </ul>
                 </div>
                 <div class="clearfix"> </div>
                 <!--/tabs-->
@@ -260,7 +248,7 @@
                                                             </li>
                                                         </ul>
                                                         <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                                                        
+
                                                         </div>
                                                         <div class="rating12">
                                                             @if (item.FeedbackStar <= 1)

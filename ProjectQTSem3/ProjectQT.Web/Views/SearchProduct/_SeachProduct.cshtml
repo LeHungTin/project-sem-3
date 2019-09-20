@@ -19,11 +19,11 @@
                     <!-- /womens -->
                     @foreach (var item in Model)
                     {
-                        <div style="width:592.333px; height:676.333px" class="col-md-3">
-                            <div class="product-googles-info googles">
+                        <div style="height: 300px;" class="col-md-3">
+                            <div class="product-googles-info googles" style="height: 180px;">
 
                                 <div class="men-pro-item">
-                                    <div class="men-thumb-item">
+                                    <div class="men-thumb-item" style="height: 150px;">
                                         <img src="@item.ImageUrl" style="width: 80%; height: 80%;">
                                         <div class="men-cart-pro">
                                             <div class="inner-men-cart-pro">
@@ -32,7 +32,10 @@
                                         </div>
                                         <span class="product-new-top">New</span>
                                     </div>
-                                    <div class="item-info-product">
+                                    
+                                </div>
+                            </div>
+							<div class="item-info-product">
                                         <div class="info-product-price">
                                             <div class="grid_meta">
                                                 <div class="product_price">
@@ -112,8 +115,6 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                </div>
-                            </div>
                         </div>
                     }
                 </div>

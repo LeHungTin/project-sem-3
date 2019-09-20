@@ -21,9 +21,11 @@
                     @Html.HiddenFor(model => model.CreateAt)
                     @Html.HiddenFor(model => model.CreateBy)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-3 mr-1">
+                            @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-8">
                             @Html.EditorFor(model => model.TypeName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.TypeName, "", new { @class = "text-danger" })
                         </div>
