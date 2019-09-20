@@ -24,10 +24,12 @@
                     @Html.HiddenFor(model => model.CreateAt)
                     @Html.HiddenFor(model => model.UpdateAt)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <div class="row">
+                        <div class="col-3">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+
+                        </div>
+                        <div class="col-8">
                             <input type="text" name="Name" value="@Model.Name" class="form-control">
                             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                         </div>

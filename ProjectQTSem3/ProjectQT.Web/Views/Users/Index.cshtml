@@ -9,9 +9,23 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    <div class="banner_inner mb-2">
+        <div class="services-breadcrumb">
+            <div class="inner_breadcrumb">
+
+                <ul class="short">
+                    <li>
+                        <a href="/">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li>Profile</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
     <div class="form-horizontal" style="width: 50%; margin: 0 auto;">
-        <h4>User</h4>
+        <h4>User profile</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
