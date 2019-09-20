@@ -67,6 +67,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductAttribute.cs" />
+    <Compile Include="Models\ProductDetailOrder.cs" />
     <Compile Include="Models\QTShopDbContext.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\TypeAttribute.cs" />

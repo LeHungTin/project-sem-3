@@ -13,6 +13,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         GenericRepository<User> _user;
         GenericRepository<OrderDetail> _orderDetail;
         GenericRepository<Product> _product;
+        GenericRepository<ProductDetailOrder> _productDetailOrder;
 
         public OrderController()
         {
@@ -20,6 +21,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
             _user = new GenericRepository<User>();
             _orderDetail = new GenericRepository<OrderDetail>();
             _product = new GenericRepository<Product>();
+            _productDetailOrder = new GenericRepository<ProductDetailOrder>();
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                              {
                                  Id = order.Id,
                                  CreateAt = order.CreateAt,
-                                 CreateBy = user.Email,
+                                 CreateBy = user.Id,
                                  Status = order.Status,
                                  UpdateAt = order.UpdateAt,
                                  UpdateBy = user.Email,
@@ -51,6 +53,7 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult OrderDetail(int id)
         {
+
             var orderDetailModel = from orderDetail in _orderDetail.GetAll()
                                    join product in _product.GetAll()
                                    on orderDetail.ProductId equals product.Id
@@ -66,7 +69,10 @@ namespace ProjectQT.Web.Areas.Admin.Controllers
                                        ProductId = product.Name,
                                        Quantity = orderDetail.Quantity,
                                        Status = orderDetail.Status,
-                                       Price = orderDetail.Price
+                                       Price = orderDetail.Price,
+                                       NameAttr = (from attrName in _productDetailOrder.GetMany(x=>x.OrderDeltailId==orderDetail.Id)
+                                                   where attrName.OrderDeltailId == orderDetail.Id
+                                                   select attrName.NameAtt).ToList()
                                    };
             ViewBag.OrderDetail = orderDetailModel;
             var getOrder = _order.GetAll().FirstOrDefault(x => x.Id == id);

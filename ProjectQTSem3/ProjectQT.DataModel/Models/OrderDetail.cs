@@ -22,6 +22,8 @@ namespace ProjectQT.DataModel.Models
 
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
+        public ICollection<ProductDetailOrder> ProductDetailOrders { get; set; }
+
 
     }
 }
